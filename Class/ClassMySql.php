@@ -51,13 +51,14 @@ function validarUsuario($user, $pass){
                       $Platos[] = $lista;
                 }           	                  
             }else{
-                echo "ERROR: en la consulta con la base de datos";	
-                echo "No pudo cargar el menu de materias";
+                echo "ERROR: en la consulta con la base de datos";
             }
             mysql_close($this->con);
             mysql_free_result($sql);
             return $Platos;  		
     }
+    
+    
     
 function CargarPracticos($id_mat){
 	$menu_practicos = array();
@@ -74,7 +75,7 @@ function CargarPracticos($id_mat){
 		mysql_close($this->con);
 		return $menu_practicos;  		
 }
-    
+  
 function CargarArchivos($id_Mat, $id_Prac){
 	$menu_archivos = array();
 	$sql = mysql_query("SELECT * FROM archpracticos WHERE Id_Materia='$id_Mat' and Id_Practico= '$id_Prac'", $this->con);
