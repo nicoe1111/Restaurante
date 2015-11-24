@@ -15,13 +15,14 @@
 </head>
 <body>
  
-<div id="tabs">
+    <div id="tabs" class="contenedor">
   <ul>
     <li><a href="#tabs-1">Ver carta comidas</a></li>
     <li><a href="#tabs-2">Ver mesas</a></li>
     <li><a href="#tabs-3">Cerrar mesa</a></li>
     <li><a href="#tabs-4">Historial de ventas</a></li>
     <li><a href="#tabs-5">Confirmar plato</a></li>
+    <li><a href="#tabs-6">Administrar comidas</a></li>
   </ul>
   <div id="tabs-1">
     <?php include("PlatosDetalles.php"); ?>
@@ -37,6 +38,9 @@
   </div>
   <div id="tabs-5">
     <p>Cocinero ve los pedidos y los confirma</p>
+  </div>
+  <div id="tabs-6">
+    <?php Require_once("AdmComidas.php");?>
   </div>
 
 </div>

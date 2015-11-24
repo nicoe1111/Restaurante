@@ -5,16 +5,16 @@
 <title>Pagina Web Tecnologo Informatica San Jose</title>
 </head>
 <link rel="stylesheet" href="css/Estilo.css" type="text/css" />
-<body style="">
+<body>
 
 <?php if(isset($_SESSION["loged"]))
-	  {
-		require_once ("inicio.php"); 
-		
-	  }else{ 
-			Require_once("login.php");
-			Require_once("Inicio.php"); 
-			}
+        {
+          require_once ("inicio.php"); 
+
+        }else{ 
+          Require_once("login.php");
+          Require_once("Inicio.php"); 
+        }
 ?>
 </body>
 </html>
