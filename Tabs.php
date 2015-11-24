@@ -23,6 +23,7 @@
     <li><a href="#tabs-4">Historial de ventas</a></li>
     <li><a href="#tabs-5">Confirmar plato</a></li>
     <li><a href="#tabs-6">Administrar comidas</a></li>
+    <li><a href="#tabs-7">Gestion Usuario</a></li>
   </ul>
   <div id="tabs-1">
     <?php include("PlatosDetalles.php"); ?>
@@ -41,6 +42,9 @@
   </div>
   <div id="tabs-6">
     <?php Require_once("AdmComidas.php");?>
+  </div>
+  <div id="tabs-7">
+    <?php Require_once("ABMUsuario/ABMUsuario.php");?>
   </div>
 
 </div>

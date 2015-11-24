@@ -140,6 +140,14 @@ function InsertarTema_Unidad($nombrePractico, $Id_materia){
 			return $sql;
 }
     
+function InsertarUsuario($nombre, $apellido, $CI, $pass, $tipo){
+    
+		$insertarUnidad = "INSERT INTO usuario(nombre, apellido, cedula, pass, tipoUser) VALUES ('$nombre','$apellido','$CI','$pass','$tipo')";
+			$sql = mysql_query($insertarUnidad,$this->con);			
+			mysql_close($this->con);
+			return $sql;
+}
+
 function Insertar_Archivo($IdPractico, $nombreArchivo, $Id_materia, $idUser){
     
 		$insertarArchivo = "INSERT INTO archpracticos(Nombre, Id_Materia, Id_Usuario, Id_Practico) VALUES ('$nombreArchivo','$Id_materia', '$idUser', '$IdPractico')";
@@ -162,14 +170,6 @@ function ModificarUser($clave, $user){
             
 		$UpdateUser = "UPDATE usuarios SET Contrasenia='$clave' WHERE Cedula='$user'";
 			$sql = mysql_query($UpdateUser,$this->con);			
-			mysql_close($this->con);
-			return $sql;
-}
-    
-function InsertUser($userInsert, $cedulaInsert, $claveInsert, $tipo){
-    
-		$insertarMateria = "INSERT INTO usuarios(Nombre, Cedula, Tipo, Contrasenia) VALUES ('$userInsert','$cedulaInsert','$tipo', '$claveInsert')";
-			$sql = mysql_query($insertarMateria,$this->con);			
 			mysql_close($this->con);
 			return $sql;
 }
