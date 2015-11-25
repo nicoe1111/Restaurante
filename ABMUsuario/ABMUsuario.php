@@ -39,6 +39,31 @@
 	}
 </script>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+ 
+  <style>
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+  </style>
+  <script>
+  $(function() {
+    $('#selectable').selectable({
+      selecting: function(event, ui) { 
+        var last_selected_id = ui.selecting.id;
+        <?php $u  = $acceso->CargarUsuario(last_selected_id) ?>
+        alert(<?php echo $u['nombre']; ?>);
+      }
+    });
+  });
+  </script>
+
+
 </head>
 <link rel="stylesheet" href="css/Estilo.css" type="text/css" />
 <body>
@@ -100,6 +125,13 @@
             </td>
         </tr>
     </table>
+    
+    <ol id="selectable">
+        <?php foreach ($usuarios as $ind=>$usuario){ ?>
+        <li id="<?php echo $usuario['cedula']; ?>" class="ui-widget-content"><?php echo $usuario['cedula']. " " .$usuario['nombre']. " " .$usuario['apellido']; ?></li>
+        <?php } ?>
+    </ol>
+    
 </form>
 <?php }else{ ?>
 <h1> Tiene que ser Administrador para ver esta pagina</h1>

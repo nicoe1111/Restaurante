@@ -16,6 +16,12 @@
         $return = $acceso->InsertarUsuario($Nombre, $Apellido, $Cedula, $Contrasenia, $Tipo);
 
     }
+    
+    $acceso = new AccesoMySql();
+    $usuarios = $acceso->getAllUsers();
+//    function cargarUsuarioMod(){
+//        alert("entro a modificar");
+//    }
 	
 ?>
 

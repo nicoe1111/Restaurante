@@ -59,6 +59,21 @@ function validarUsuario($user, $pass){
             return $Platos;  		
     }
     
+    function getAllUsers(){
+            $Users = array();
+            $sql = mysql_query("SELECT * FROM usuario ORDER BY nombre ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Users[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";	
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Users;  		
+    }
+    
 function CargarPracticos($id_mat){
 	$menu_practicos = array();
 	$sql = mysql_query("SELECT * FROM practicos WHERE Id_Materia='$id_mat'", $this->con);
