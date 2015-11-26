@@ -1,6 +1,4 @@
 <?php require_once("Includes/ProcesaInicio.php"); ?>
-<!doctype html>
-<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>jQuery UI Accordion - Default functionality</title>
@@ -23,8 +21,10 @@
                 <table>
                     <tr>
                         <td>
-                            <div><h1> $ <?php echo $plato['precio']; ?> </h1></div>
-                            <div><img width="100px" height="100px" alt="<?php echo $plato['nombre']; ?>" src="/Imagenes/ <?php echo $plato['id_plato']; ?>.jpg"/> </div>
+                            <div style="width: 150px"><h1> $ <?php echo $plato['precio']; ?> </h1></div>
+                        </td>
+                        <td>
+                           <div style="width: 400px"><img width="300px" height="200px" alt="<?php echo $plato['nombre']; ?>" src="Imagenes/<?php echo $plato['imagen']; ?>"/> </div>    
                         </td>
                         <td>
                             <h4> <?php echo $plato['descripcion']; ?> </h4>
@@ -35,4 +35,3 @@
             <?php } ?>
         </div>
     </body>
-</html>

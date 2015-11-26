@@ -58,9 +58,26 @@ function validarUsuario($user, $pass){
             return $Platos;  		
     }
     
+    function crearPlato($nombreComida, $precio, $descripcionComida, $categoria, $imagen){
+        $insertarPlato = "INSERT INTO plato(nombre, precio, descripcion, tipo, imagen) VALUES ('$nombreComida','$precio','$descripcionComida','$categoria','$imagen')";
+        $sql = mysql_query($insertarPlato,$this->con);			
+        mysql_close($this->con);
+        return $sql;    
+    }
     
+function eliminarPlato($id){
+        $deletePlato = "DELETE FROM plato WHERE id_plato='$id'";
+        $sql = mysql_query($deletePlato,$this->con);	
+	if ($sql){
+            echo "Se elimino el plato correctamente";
+	}else{
+            echo "ERROR: en la consulta con la base de datos";	
+	}
+        mysql_close($this->con);
+        return $sql;
+}
     
-function CargarPracticos($id_mat){
+    function CargarPracticos($id_mat){
 	$menu_practicos = array();
 	$sql = mysql_query("SELECT * FROM practicos WHERE Id_Materia='$id_mat'", $this->con);
 	if ($sql){
