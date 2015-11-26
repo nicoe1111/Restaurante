@@ -162,6 +162,28 @@ function InsertarUsuario($nombre, $apellido, $CI, $pass, $tipo){
 			return $sql;
 }
 
+function FiltrarUsuario($dato){
+            $Users = array();
+            $sql = mysql_query("SELECT * FROM usuario WHERE nombre LIKE '%$dato%' OR apellido LIKE '%$dato%' OR cedula LIKE '%$dato%' OR tipoUser LIKE '%$dato%' ORDER BY cedula ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Users[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";	
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Users;  	
+}
+
+function ModificarUsuario($nombre, $apellido, $cedula, $pass, $tipo){
+		$insertarUnidad = ("UPDATE usuario SET nombre = '$nombre', apellido = '$apellido', tipoUser = '$tipo', pass = '$pass' WHERE cedula = '$cedula'");
+			$sql = mysql_query($insertarUnidad,$this->con);			
+			mysql_close($this->con);
+			return $sql;
+}
+
 function Insertar_Archivo($IdPractico, $nombreArchivo, $Id_materia, $idUser){
     
 		$insertarArchivo = "INSERT INTO archpracticos(Nombre, Id_Materia, Id_Usuario, Id_Practico) VALUES ('$nombreArchivo','$Id_materia', '$idUser', '$IdPractico')";
