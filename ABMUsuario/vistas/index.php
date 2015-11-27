@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tienda</title>
-<link href="css/estilo.css" rel="stylesheet"/>
+<link href="css/estiloModal.css" rel="stylesheet"/>
 <!--<script src="ABMUsuario/js/jquery.js"></script>-->
 <script src="ABMUsuario/js/myjava.js"></script>
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
@@ -20,7 +20,7 @@
     <section>
     <table border="0" align="center">
     	<tr>
-        	<td width="335"><input type="text" placeholder="Busca un producto por: Nombre o Tipo" id="bs-prod"/></td>
+        	<td width="335"><input type="text" placeholder="Busca un Usuario por: Nombre, Apellido, Cedula o Tipo" id="bs-prod"/></td>
             <td width="100"><button id="nuevo-producto" class="btn btn-primary">Nuevo</button></td>
         </tr>
     </table>
@@ -41,7 +41,7 @@
             $usuarios = $acceso->getAllUsers();
             foreach ($usuarios as $usuario){
                 echo '<tr>
-                        <td><p>'.$usuario['nombre'].'</p></td>
+                        <td>'.$usuario['nombre'].'</td>
                         <td>'.$usuario['apellido'].'</td>
                         <td>'.$usuario['cedula'].'</td>
                         <td>'.$usuario['tipoUser'].'</td>
