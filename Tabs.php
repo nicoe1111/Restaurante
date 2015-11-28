@@ -40,7 +40,7 @@
     <p>Cocinero ve los pedidos y los confirma</p>
   </div>
   <div id="tabs-6">
-    <?php Require_once("AdmComidas.php");?>
+    <?php Require_once("ABMComidas/vistas/index.php");?>
   </div>
   <div id="tabs-7">
     <?php Require_once("ABMUsuario/vistas/index.php");?>

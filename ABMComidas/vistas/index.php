@@ -3,9 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tienda</title>
-<link href="css/estilo.css" rel="stylesheet"/>
-<!--<script src="ABMUsuario/js/jquery.js"></script>-->
-<script src="ABMUsuario/js/myjava.js"></script>
+<link href="css/estilo_1.css" rel="stylesheet"/>
+<script src="ABMComidas/js/myjava.js"></script>
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
@@ -16,82 +15,88 @@
 </head>
 <body>
     <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
-    <header>Gestionar Usuarios</header>
+    <header>Gestionar Comidas</header>
     <section>
     <table border="0" align="center">
     	<tr>
-        	<td width="335"><input type="text" placeholder="Busca un producto por: Nombre o Tipo" id="bs-prod"/></td>
-            <td width="100"><button id="nuevo-producto" class="btn btn-primary">Nuevo</button></td>
+        	<td width="500"><input type="text" placeholder="Buscar: Nombre o Tipo" id="bs-comida"/></td>
+            <td width="150"><button id="nueva-comida" class="btn btn-primary">Nuevo</button></td>
         </tr>
     </table>
     </section>
 
-    <div class="registros" id="agrega-registros">
+    <div class="registros" id="agrega-comidas">
         <table class="table table-striped table-condensed table-hover">
             <tr>
-                <th width="300">Nombre</th>
-                <th width="200">Apellido</th>
-                <th width="150">Cedula</th>
+                <th width="150">Nombre</th>
+                <th width="350">Descripcion</th>
+                <th width="100">Precio</th>
                 <th width="150">Tipo</th>
-                <th width="50">Opciones</th>
+                <th width="100">Imagen</th>
             </tr>
         <?php
             
             $acceso = new AccesoMySql();
-            $usuarios = $acceso->getAllUsers();
-            foreach ($usuarios as $usuario){
+            $comidas = $acceso->CargarPlatos();
+            foreach ($comidas as $comida){
                 echo '<tr>
-                        <td><p>'.$usuario['nombre'].'</p></td>
-                        <td>'.$usuario['apellido'].'</td>
-                        <td>'.$usuario['cedula'].'</td>
-                        <td>'.$usuario['tipoUser'].'</td>
-                        <td><a href="javascript:editarProducto('.$usuario['cedula'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminarProducto('.$usuario['cedula'].');" class="glyphicon glyphicon-remove-circle"></a></td>
+                        <td>'.$comida['nombre'].'</td>
+                        <td>'.$comida['descripcion'].'</td>
+                        <td>'.$comida['precio'].'</td>
+                        <td>'.$comida['tipo'].'</td>
+                        <td>'.$comida['imagen'].'</td>
+                        <td><a href="javascript:editarComida('.$comida['id_plato'].');"><img width="30px" height="30px" src="css/Icono_Editar.png"/></a> <a href="javascript:eliminarComida('.$comida['id_plato'].');"><img width="30px" height="30px" src="css/Icono_Eliminar.jpg"/></a></td>
                     </tr>';   
             }
         ?>
         </table>
     </div>
-    <!-- MODAL PARA EL REGISTRO DE PRODUCTOS-->
-    <div class="modal fade" id="registra-producto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- MODAL PARA EL REGISTRO DE comidas-->
+    <div class="modal fade" id="registra-comida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel"><b>Registra o Edita un Producto</b></h4>
+              <h4 class="modal-title" id="myModalLabel"><b>Registra o Edita una Comida</b></h4>
             </div>
-            <form id="formulario" class="formulario" onsubmit="return agregaRegistro();">
+              <form id="formularioComida" method="POST" enctype="multipart/form-data" class="formularioComida" onsubmit="return agregaComida();">
             <div class="modal-body">
-				<table border="0" width="100%">
-               		 <tr>
-                        <td colspan="2"><input type="text" required="required" readonly="readonly" id="id-prod" name="id-prod" readonly="readonly" style="visibility:hidden; height:5px;"/></td>
+		<table border="0" width="100%">
+                     <td rowspan="7">
+                        <img name="archivo" id="archivo" value="Imagen menu" style="width: 250px; height: 250px"/>
+                    </td>
+                    <tr>
+                        <td colspan="2"><input type="text" style="display: none;" readonly="readonly" id="id" name="id" readonly="readonly"/></td>
                     </tr>
                      <tr>
-                    	<td width="150">Proceso: </td>
-                        <td><input type="text" required="required" readonly="readonly" id="pro" name="pro"/></td>
-                    </tr>
-                    <tr>
-                    	<td>Cedula: </td>
-                        <td><input type="text" required="required" name="cedula" id="cedula"/></td>
+                         <td  width="150" style="display: none;">Proceso: </td>
+                        <td><input type="text" required="required" style="display: none;" readonly="readonly" id="proComida" name="proComida"/></td>
                     </tr>
                     <tr>
                     	<td>Nombre: </td>
-                        <td><input type="text" required="required" name="nombre" id="nombre" maxlength="100"/></td>
+                        <td><input type="text" required="required" name="nombreComida" id="nombreComida"/></td>
                     </tr>
                     <tr>
-                    	<td>Apellido: </td>
-                        <td><input type="text" required="required" name="apellido" id="apellido" maxlength="100"/></td>
+                    	<td>Descripcion: </td>
+                        <td><input type="text" required="required" name="descripcion" id="descripcion" maxlength="100"/></td>
+                    </tr>
+                    <tr>
+                    	<td>Precio: </td>
+                        <td><input type="text" required="required" name="precio" id="precio" maxlength="100"/></td>
                     </tr>
                     <tr>
                     	<td>Tipo: </td>
-                        <td><select required="required" name="tipo" id="tipo">
-                        	<option value="Mozo">Mozo</option>
-                                <option value="Cajero">Cajero</option>
-                                <option value="Cocina">Cocina</option>
+                        <td><select required="required" name="tipoComida" id="tipoComida">
+                        	<option value="Entrada">Entrada</option>
+                                <option value="Plato principal">Plato principal</option>
+                                <option value="Postre">Postre</option>
+                                <option value="Bebida">Bebida</option>
                             </select></td>
                     </tr>
                     <tr>
-                    	<td>Contraseña: </td>
-                        <td><input type="text" required="required" name="pass" id="pass"/></td>
+                        <input type="hidden" name="MAX_FILE_SIZE"  value="4554227" />
+                        <input type="file" name="imagen" id="imagen" onchange="readURL(this);"/>
+                        <input name="textImagen" id="textImagen" />
                     </tr>
                     <tr>
                     	<td colspan="2">
@@ -102,8 +107,8 @@
             </div>
             
             <div class="modal-footer">
-            	<input type="submit" value="Registrar" class="btn btn-success" id="reg"/>
-                <input type="submit" value="Editar" class="btn btn-warning"  id="edi"/>
+            	<input type="submit" value="Registrar" class="btn btn-success" id="regComida"/>
+                <input type="submit" value="Editar" class="btn btn-warning"  id="ediComida"/>
             </div>
             </form>
           </div>

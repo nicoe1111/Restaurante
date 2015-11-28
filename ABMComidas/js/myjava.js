@@ -1,25 +1,25 @@
 $(function(){
-	$('#nuevo-producto').on('click',function(){
-		$('#formulario')[0].reset();
-		$('#pro').val('Registro');
-                $('#cedula').prop("readonly", false);
-		$('#edi').hide();
-		$('#reg').show();
-		$('#registra-producto').modal({
+	$('#nueva-comida').on('click',function(){
+		$('#formularioComida')[0].reset();
+		$('#proComida').val('Registro');
+                $('#id').prop("readonly", false);
+		$('#ediComida').hide();
+		$('#regComida').show();
+		$('#registra-comida').modal({
 			show:true,
 			backdrop:'static'
 		});
 	});
 	
-	$('#bs-prod').on('keyup',function(){
-		var dato = $('#bs-prod').val();
-		var url = 'ABMUsuario/php/busca_producto.php';
+	$('#bs-comida').on('keyup',function(){
+		var dato = $('#bs-comida').val();
+		var url = 'ABMComidas/php/busca_comida.php';
 		$.ajax({
 		type:'POST',
 		url:url,
 		data:'dato='+dato,
 		success: function(datos){
-			$('#agrega-registros').html(datos);
+			$('#agrega-comidas').html(datos);
 		}
 	});
 	return false;
@@ -27,21 +27,41 @@ $(function(){
 	
 });
 
-function agregaRegistro(){
-	var url = 'ABMUsuario/php/agrega_producto.php';
+function agregaComida(event){
+	var url = 'ABMComidas/php/agrega_comida.php';
+
+        var fd = new FormData();
+//        var imagen = $("#imagen")[0].files[0];
+//        var nombre = $("#nombreComida")[0].files[0];
+//        var descripcion = $("#descripcion")[0].files[0];
+//        var precio = $("#precio")[0].files[0];
+//        var tipo = $("#tipoComida")[0].files[0];
+//        var proceso = $("#proComida")[0].files[0];
+        fd.append('id', $("#id"));
+        fd.append('imagen', $("#imagen")[0].files[0]);
+        fd.append('nombreComida', $("#nombreComida")[0]);
+        fd.append('descripcion', $("#descripcion")[0]);
+        fd.append('precio', $("#precio")[0]);
+        fd.append('tipoComida', $("#tipoComida")[0]);
+        fd.append('proComida', $("#proComida")[0]);
+
 	$.ajax({
 		type:'POST',
 		url:url,
-		data:$('#formulario').serialize(),
+		data:fd,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
 		success: function(registro){
-			if ($('#pro').val() == 'Registro'){
-			$('#formulario')[0].reset();
+			if ($('#proComida').val() === 'Registro'){
+			$('#formularioComida')[0].reset();
 			$('#mensaje').addClass('bien').html('Registro completado con exito').show(200).delay(2500).hide(200);
-			$('#agrega-registros').html(registro);
+			$('#agrega-comidas').html(registro);
 			return false;
 			}else{
 			$('#mensaje').addClass('bien').html('Edicion completada con exito').show(200).delay(2500).hide(200);
-			$('#agrega-registros').html(registro);
+			$('#agrega-comidas').html(registro);
 			return false;
 			}
 		}
@@ -49,16 +69,16 @@ function agregaRegistro(){
 	return false;
 }
 
-function eliminarProducto(id){
-	var url = 'ABMUsuario/php/elimina_producto.php';
-	var pregunta = confirm('¿Esta seguro de eliminar este Producto?');
+function eliminarComida(id){
+	var url = 'ABMComidas/php/elimina_comida.php';
+	var pregunta = confirm('¿Esta seguro de eliminar esta comida?');
 	if(pregunta==true){
 		$.ajax({
 		type:'POST',
 		url:url,
 		data:'id='+id,
 		success: function(registro){
-			$('#agrega-registros').html(registro);
+			$('#agrega-comidas').html(registro);
 			return false;
 		}
 	});
@@ -68,25 +88,26 @@ function eliminarProducto(id){
 	}
 }
 
-function editarProducto(id){
-	$('#formulario')[0].reset();
-	var url = 'ABMUsuario/php/edita_producto.php';
+function editarComida(id){
+	$('#formularioComida')[0].reset();
+	var url = 'ABMComidas/php/edita_comida.php';
 		$.ajax({
 		type:'POST',
 		url:url,
 		data:'id='+id,
 		success: function(valores){
 				var datos = eval(valores);
-				$('#reg').hide();
-				$('#edi').show();
-                                $('#cedula').prop("readonly", true);
-				$('#pro').val('Edicion');
-				$('#cedula').val(id);
-				$('#nombre').val(datos[0]);
-				$('#apellido').val(datos[1]);
-				$('#tipo').val(datos[2]);
-				$('#pass').val(datos[3]);
-				$('#registra-producto').modal({
+				$('#regComida').hide();
+				$('#ediComida').show();
+                                $('#id').prop("readonly", true);
+				$('#proComida').val('Edicion');
+                                $('#id').val(id);
+				$('#nombreComida').val(datos[0]);
+				$('#descripcion').val(datos[1]);
+                                $('#precio').val(datos[2]);
+				$('#tipoComida').val(datos[3]);
+				$('#textImagen').val(datos[4]);
+				$('#registra-comida').modal({
 					show:true,
 					backdrop:'static'
 				});
@@ -95,3 +116,14 @@ function editarProducto(id){
 	});
 	return false;
 }
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#archivo')
+        .attr('src', e.target.result)
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+} 

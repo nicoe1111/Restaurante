@@ -77,7 +77,6 @@ function eliminarPlato($id){
         return $sql;
 }
     
-    function CargarPracticos($id_mat){
     function getAllUsers(){
             $Users = array();
             $sql = mysql_query("SELECT * FROM usuario ORDER BY nombre ASC", $this->con);
@@ -92,22 +91,6 @@ function eliminarPlato($id){
             mysql_free_result($sql);
             return $Users;  		
     }
-    
-function CargarPracticos($id_mat){
-	$menu_practicos = array();
-	$sql = mysql_query("SELECT * FROM practicos WHERE Id_Materia='$id_mat'", $this->con);
-	if ($sql){
-			while ($lista = mysql_fetch_array($sql)){
-				$menu_practicos[] = $lista;
-			}           	                  
-	}else{
-		echo "ERROR: en la consulta con la base de datos";	
-		echo "<br />";
-		echo "No pudo cargar los practicos";
-	}
-		mysql_close($this->con);
-		return $menu_practicos;  		
-}
   
 function CargarArchivos($id_Mat, $id_Prac){
 	$menu_archivos = array();
@@ -196,6 +179,21 @@ function FiltrarUsuario($dato){
             return $Users;  	
 }
 
+function FiltrarComida($dato){
+            $platos = array();
+            $sql = mysql_query("SELECT * FROM plato WHERE nombre LIKE '%$dato%' OR precio LIKE '%$dato%' OR tipo LIKE '%$dato%' ORDER BY id_plato ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $platos[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";	
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $platos;  	
+}
+
 function ModificarUsuario($nombre, $apellido, $cedula, $pass, $tipo){
 		$insertarUnidad = ("UPDATE usuario SET nombre = '$nombre', apellido = '$apellido', tipoUser = '$tipo', pass = '$pass' WHERE cedula = '$cedula'");
 			$sql = mysql_query($insertarUnidad,$this->con);			
@@ -203,11 +201,11 @@ function ModificarUsuario($nombre, $apellido, $cedula, $pass, $tipo){
 			return $sql;
 }
 
-function Insertar_Archivo($IdPractico, $nombreArchivo, $Id_materia, $idUser){
-    
-		$insertarArchivo = "INSERT INTO archpracticos(Nombre, Id_Materia, Id_Usuario, Id_Practico) VALUES ('$nombreArchivo','$Id_materia', '$idUser', '$IdPractico')";
-			$sql = mysql_query($insertarArchivo,$this->con);			
+function ModificarPlato($id, $nombre, $precio, $descripcion, $tipo, $imagen){
+		$modificarUnidad = ("UPDATE plato SET nombre = '$nombre', precio = '$precio', descripcion = '$descripcion', tipo = '$tipo', imagen = '$imagen' WHERE id_plato = '$id'");
+			$sql = mysql_query($modificarUnidad,$this->con);			
 			mysql_close($this->con);
+                        echo 'iddddd'.$id;
 			return $sql;
 }
     
@@ -246,4 +244,3 @@ function InsertarUnidad($nombre, $idMateria){
 }
     
 }
-?>

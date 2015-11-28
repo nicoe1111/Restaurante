@@ -1,49 +1,85 @@
 <?php
 require_once("../../Class/ClassMySql.php");
 $acceso = new AccesoMySql();
-$cedula = $_POST['cedula'];
-$proceso = $_POST['pro'];
-$nombre = $_POST['nombre'];
-$apellido = $_POST['apellido'];
-$tipo = $_POST['tipo'];
-$pass = $_POST['pass'];
+$id = $_POST['id'];
+$proceso = $_POST['proComida'];
+$nombre = $_POST['nombreComida'];
+$descripcion = $_POST['descripcion'];
+$precio = $_POST['precio'];
+$tipo = $_POST['tipoComida'];
+$imagen = $_FILES['imagen'];
 //VERIFICAMOS EL PROCESO
+echo 'proceso'.$proceso;
+echo 'imagen'.$imagen;
+echo 'nombre'.$nombre;
+echo 'tipo'.$tipo;
+
+    function cargarImagen(){
+
+        if (!empty($_FILES['imagen']['name'])){
+
+              $MaxSubida = $_POST['MAX_FILE_SIZE'];
+              $archivo = $_FILES["imagen"]["tmp_name"]; 
+              $tamanio = $_FILES["imagen"]["size"];
+              $tipo    = $_FILES["imagen"]["type"];
+              $nombre  = $_FILES["imagen"]["name"];
+              $directorio = "Imagenes/";			
+              $directorio = $directorio . basename( $_FILES['imagen']['name']);
+
+          if(!\file_exists($directorio)){
+                if ($tamanio < $MaxSubida){
+                       if(move_uploaded_file($archivo, $directorio)){
+                            
+                            return $nombre.$tipo;
+                       }else {
+                            echo "Lo sentimos, hubo un problema subiendo tu archivo. Error: ".$_FILES['imagen']['error'] ;
+                       }
+               }else{
+               echo "NO se ha podido guardar el archivo en la base de datos. supera el tanio permitido ";
+               }
+                  header('Location:Inicio.php');
+                  }
+      }
+    }
+
 
 switch($proceso){
 	case 'Registro':
-            $acceso->InsertarUsuario($nombre, $apellido, $cedula, $pass, $tipo);
-//		mysql_query("INSERT INTO usuario (cedula, nombre, precio_unit, precio_dist, fecha_reg)VALUES('$cedula','$nombre','$tipo','$precio_uni','$pass', '$fecha')");
+            echo 'dfdaf'.$imagen;
+            $acceso->crearPlato($nombre, $precio, $descripcion, $tipo, $imagen);
+            cargarImagen();
 	break;
 	
 	case 'Edicion':
-		$acceso->ModificarUsuario($nombre, $apellido, $cedula, $pass, $tipo);
+            $acceso->ModificarPlato($id, $nombre, $precio, $descripcion, $tipo, $imagen);
+            cargarImagen();
 	break;
 }
 
 
-//ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
-//$registro = mysql_query("SELECT * FROM productos ORDER BY id_prod ASC");
+
+//ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 $acceso2 = new AccesoMySql();
-$usuarios = $acceso2->getAllUsers();
+$comidas = $acceso2->CargarPlatos();
 echo '<table class="table table-striped table-condensed table-hover">
             <tr>
-                <th width="300">Nombre</th>
-                <th width="200">Apellido</th>
-                <th width="150">Cedula</th>
+                <th width="150">Nombre</th>
+                <th width="350">Descripcion</th>
+                <th width="100">Precio</th>
                 <th width="150">Tipo</th>
-                <th width="50">Opciones</th>
+                <th width="100">Imagen</th>
             </tr>';
-	foreach ($usuarios as $usuario){
+	foreach ($comidas as $comida){
                 echo '<tr>
-                        <td>'.$usuario['nombre'].'</td>
-                        <td>'.$usuario['apellido'].'</td>
-                        <td>'.$usuario['cedula'].'</td>
-                        <td>'.$usuario['tipoUser'].'</td>
-                        <td><a href="javascript:editarProducto('.$usuario['cedula'].');" class="glyphicon glyphicon-edit"></a> <a href="javascript:eliminarProducto('.$usuario['cedula'].');" class="glyphicon glyphicon-remove-circle"></a></td>
-                    </tr>';   
+                        <td><p>'.$comida['nombre'].'</p></td>
+                        <td>'.$comida['descripcion'].'</td>
+                        <td>'.$comida['precio'].'</td>
+                        <td>'.$comida['tipo'].'</td>
+                        <td>'.$comida['imagen'].'</td>
+                        <td><a href="javascript:editarComida('.$comida['id_plato'].');" ><img width="30px" height="30px" src="css/Icono_Editar.png"/></a> <a href="javascript:eliminarComida('.$comida['id_plato'].');"><img width="30px" height="30px" src="css/Icono_Eliminar.jpg"/></a></td>
+                    </tr>';  
         }
 echo '</table>';
-?>
