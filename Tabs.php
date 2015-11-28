@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
   $(function() {
     $( "#tabs" ).tabs();
@@ -44,7 +43,7 @@
     <?php Require_once("AdmComidas.php");?>
   </div>
   <div id="tabs-7">
-    <?php Require_once("ABMUsuario/ABMUsuario.php");?>
+    <?php Require_once("ABMUsuario/vistas/index.php");?>
   </div>
 
 </div>

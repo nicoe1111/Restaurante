@@ -78,6 +78,22 @@ function eliminarPlato($id){
 }
     
     function CargarPracticos($id_mat){
+    function getAllUsers(){
+            $Users = array();
+            $sql = mysql_query("SELECT * FROM usuario ORDER BY nombre ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Users[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";	
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Users;  		
+    }
+    
+function CargarPracticos($id_mat){
 	$menu_practicos = array();
 	$sql = mysql_query("SELECT * FROM practicos WHERE Id_Materia='$id_mat'", $this->con);
 	if ($sql){
@@ -160,6 +176,28 @@ function InsertarTema_Unidad($nombrePractico, $Id_materia){
 function InsertarUsuario($nombre, $apellido, $CI, $pass, $tipo){
     
 		$insertarUnidad = "INSERT INTO usuario(nombre, apellido, cedula, pass, tipoUser) VALUES ('$nombre','$apellido','$CI','$pass','$tipo')";
+			$sql = mysql_query($insertarUnidad,$this->con);			
+			mysql_close($this->con);
+			return $sql;
+}
+
+function FiltrarUsuario($dato){
+            $Users = array();
+            $sql = mysql_query("SELECT * FROM usuario WHERE nombre LIKE '%$dato%' OR apellido LIKE '%$dato%' OR cedula LIKE '%$dato%' OR tipoUser LIKE '%$dato%' ORDER BY cedula ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Users[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";	
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Users;  	
+}
+
+function ModificarUsuario($nombre, $apellido, $cedula, $pass, $tipo){
+		$insertarUnidad = ("UPDATE usuario SET nombre = '$nombre', apellido = '$apellido', tipoUser = '$tipo', pass = '$pass' WHERE cedula = '$cedula'");
 			$sql = mysql_query($insertarUnidad,$this->con);			
 			mysql_close($this->con);
 			return $sql;
