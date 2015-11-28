@@ -3,19 +3,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tienda</title>
-<link href="css/estiloModal.css" rel="stylesheet"/>
-<!--<script src="ABMUsuario/js/jquery.js"></script>-->
+<!--<link href="css/estiloModal.css" rel="stylesheet"/>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="ABMUsuario/js/myjava.js"></script>
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
 <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/>
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
-<?php require_once("/Class/ClassMySql.php"); ?>
+<script src="bootstrap/js/bootstrap.js"></script>-->
+<?php require_once("../../Class/ClassMySql.php"); ?>
+<script src="ABMUsuario/js/myjava.js"></script>
 </head>
 <body>
-    <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
     <header>Gestionar Usuarios</header>
     <section>
     <table border="0" align="center">
@@ -62,10 +63,7 @@
             <form id="formulario" class="formulario" onsubmit="return agregaRegistro();">
             <div class="modal-body">
 				<table border="0" width="100%">
-               		 <tr>
-                        <td colspan="2"><input type="text" required="required" readonly="readonly" id="id-prod" name="id-prod" readonly="readonly" style="visibility:hidden; height:5px;"/></td>
-                    </tr>
-                     <tr>
+                    <tr style="display:none">
                     	<td width="150">Proceso: </td>
                         <td><input type="text" required="required" readonly="readonly" id="pro" name="pro"/></td>
                     </tr>
@@ -109,8 +107,6 @@
           </div>
         </div>
       </div>
-    <?php }else{ ?>
-        <h1> Tiene que ser Administrador para ver esta pagina</h1>
-    <?php } ?>
+    
 </body>
 </html>

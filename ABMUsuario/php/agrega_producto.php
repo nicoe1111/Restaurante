@@ -8,7 +8,7 @@ $apellido = $_POST['apellido'];
 $tipo = $_POST['tipo'];
 $pass = $_POST['pass'];
 //VERIFICAMOS EL PROCESO
-
+echo "proceso =".$proceso;
 switch($proceso){
 	case 'Registro':
             $acceso->InsertarUsuario($nombre, $apellido, $cedula, $pass, $tipo);
