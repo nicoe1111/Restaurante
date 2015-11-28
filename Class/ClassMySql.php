@@ -242,5 +242,21 @@ function InsertarUnidad($nombre, $idMateria){
 			mysql_close($this->con);
 			return $sql;
 }
-    
+
+function getAllMesas(){
+            $Mesa = array();
+            $sql = mysql_query("SELECT * FROM mesa ORDER BY nombre ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Mesa[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";	
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Mesa;  		
+    }
 }
+
+?>
