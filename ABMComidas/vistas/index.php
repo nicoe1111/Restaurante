@@ -1,17 +1,12 @@
+<?php require_once("../../Class/ClassMySql.php");
+       require_once '../../seguridad.php';
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tienda</title>
-<link href="css/estilo_1.css" rel="stylesheet"/>
 <script src="ABMComidas/js/myjava.js"></script>
-<link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
-<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>
-<?php require_once("/Class/ClassMySql.php"); ?>
 </head>
 <body>
     <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
@@ -63,7 +58,7 @@
             <div class="modal-body">
 		<table border="0" width="100%">
                      <td rowspan="7">
-                        <img name="archivo" id="archivo" value="Imagen menu" style="width: 250px; height: 250px"/>
+                         <img name="archivo" id="archivo" value="Imagen menu" style="width: 250px; height: 250px" src=""/>
                     </td>
                     <tr>
                         <td colspan="2"><input type="text" style="display: none;" readonly="readonly" id="id" name="id" readonly="readonly"/></td>

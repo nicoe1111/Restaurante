@@ -29,6 +29,12 @@
                 $( "#PlatosDetalles" ).click(function(evt) {
                     $( "#contenedor" ).load("PlatosDetalles.php")
                 });
+                $( "#getionComida" ).click(function(evt) {
+                    $( "#contenedor" ).load("ABMComidas/vistas/index.php")
+                });
+                $( "#pedidosMesa" ).click(function(evt) {
+                    $( "#contenedor" ).load("ABMPedidoMesa/vistas/index.php")
+                });                  
             });
     </script>
 </head>
@@ -40,8 +46,9 @@
         <li><a href="#" data-toggle="tab">Cerrar</a></li>
         <li><a href="#" data-toggle="tab">Historial de ventas</a></li>
         <li><a href="#" data-toggle="tab">Confirmar plato</a></li>
-        <li><a href="AdmComidas.php" data-toggle="tab">Administrar comidas</a></li>
-        <li><a id="gestionUsuario" href="#" data-toggle="tab">Gestion Usuario</a></li>
+        <li><a id="getionComida" href="3" data-toggle="tab">Administrar comidas</a></li>
+        <li><a id="getionComida" href="3" data-toggle="tab">Administrar comidas</a></li>
+        <li><a id="pedidosMesa" href="#" data-toggle="tab">Pedidos Mesa</a></li>
     </ul>
         
         
