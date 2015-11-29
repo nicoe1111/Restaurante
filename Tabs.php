@@ -39,7 +39,10 @@
                 });  
                 $( "#historialVentas" ).click(function(evt) {
                     $( "#contenedor" ).load("HistorialVentas/vistas/index.php")
-                });                 
+                });
+                $( "#ordenes" ).click(function(evt) {
+                    $( "#contenedor" ).load("Ordenes/CrearOrden.php")
+                }); 
             });
     </script>
 </head>
@@ -49,7 +52,6 @@
         <li class="active"><a id="PlatosDetalles" href="PlatosDetalles.php" data-toggle="tab">Ver carta comidas</a></li>
         <li><a id="verMesas" href="#" data-toggle="tab">Ver mesas</a></li>
         <li><a href="#" data-toggle="tab">Cerrar</a></li>
-        <li><a href="#" data-toggle="tab">Historial de ventas</a></li>
         <li><a href="#" data-toggle="tab">Confirmar plato</a></li>
         <li><a id="getionComida" href="#" data-toggle="tab">Administrar comidas</a></li>
         <li><a id="gestionUsuario" href="#" data-toggle="tab">Gestion Usuarios</a></li>
