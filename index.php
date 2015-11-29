@@ -16,16 +16,16 @@
     <script src="bootstrap/js/bootstrap.js"></script>
 </head>
 <link rel="stylesheet" href="css/Estilo.css" type="text/css" />
-<body>
+<body style="box-shadow: #000000">
+    
+    <?php if(isset($_SESSION["loged"]))
+            {
+              require_once ("inicio.php"); 
 
-<?php if(isset($_SESSION["loged"]))
-        {
-          require_once ("inicio.php"); 
-
-        }else{ 
-          Require_once("login.php");
-          Require_once("Inicio.php"); 
-        }
-?>
+            }else{ 
+              Require_once("login.php");
+              Require_once("Inicio.php"); 
+            }
+    ?>
 </body>
 </html>

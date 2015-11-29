@@ -51,8 +51,6 @@
     <ul class="nav nav-tabs">
         <li class="active"><a id="PlatosDetalles" href="PlatosDetalles.php" data-toggle="tab">Ver carta comidas</a></li>
         <li><a id="verMesas" href="#" data-toggle="tab">Ver mesas</a></li>
-        <li><a href="#" data-toggle="tab">Cerrar</a></li>
-        <li><a href="#" data-toggle="tab">Confirmar plato</a></li>
         <li><a id="getionComida" href="#" data-toggle="tab">Administrar comidas</a></li>
         <li><a id="gestionUsuario" href="#" data-toggle="tab">Gestion Usuarios</a></li>
         <li><a id="pedidosMesa" href="#" data-toggle="tab">Pedidos Mesa</a></li>
