@@ -265,6 +265,57 @@ function getAllMesas(){
             mysql_free_result($sql);
             return $Mesa;  		
     }
+    
+    function getMesasConPlatos(){
+            $Mesa = array();
+            $sql = mysql_query("SELECT m.* FROM mesa m JOIN mesa_plato mp ON m.id_mesa = mp.id_mesa WHERE mp.confirmar is false GROUP BY m.id_mesa ORDER BY m.nombre ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Mesa[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";	
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Mesa;  		
+    }
+    
+   function getPlatosMesa($id){
+        $Platos = array();
+        $sql = mysql_query("SELECT * FROM plato p JOIN mesa_plato mp ON p.id_plato = mp.id_plato WHERE mp.id_mesa = ' $id ' ORDER BY precio ASC", $this->con);
+        if ($sql){
+            while ($lista = mysql_fetch_array($sql)){
+                  $Platos[] = $lista;
+            }           	                  
+        }else{
+            echo "ERROR: en la consulta con la base de datos";
+        }
+        mysql_close($this->con);
+        mysql_free_result($sql);
+        return $Platos; 
+    }
+    
+    function getPlatosMesaCocinero($id){
+        $Platos = array();
+        $sql = mysql_query("SELECT * FROM plato p JOIN mesa_plato mp ON p.id_plato = mp.id_plato WHERE mp.id_mesa = '$id' AND mp.confirmar is false", $this->con);
+        if ($sql){
+            while ($lista = mysql_fetch_array($sql)){
+                  $Platos[] = $lista;
+            }           	                  
+        }else{
+            echo "ERROR: en la consulta con la base de datos";
+        }
+        mysql_close($this->con);
+        mysql_free_result($sql);
+        return $Platos; 
+    }
+    
+    function setPlatosMesaConfirmar($id){
+        $sql = mysql_query("UPDATE `mesa_plato` SET `confirmar` = '1' WHERE `mesa_plato`.`id_mesa_plato` = '$id';", $this->con);
+        mysql_close($this->con);
+        return $sql; 
+    }
 }
 
 ?>

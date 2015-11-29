@@ -35,7 +35,7 @@
 	<tr><input type="text" id="usuario" name="usuario"/></tr>
 	<tr><b>Clave:</b></tr>
 	<tr><input type="password" id="clave" name="clave"/></tr>
-	<tr><input type="submit" value="Login" id="enviar" name="enviar" onclick="return validarCampos();"/>
+	<tr><input type="submit" class="btn btn-primary" value="Login" id="enviar" name="enviar" onclick="return validarCampos();"/>
 	</tr>
   </table>
   </fieldset>
