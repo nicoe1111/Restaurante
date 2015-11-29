@@ -1,3 +1,5 @@
+<?php require_once '../../seguridad.php'; ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,15 +17,35 @@
 <script>
     $(function() {
         $("#accordion1").accordion({
-      heightStyle: "content"
+            heightStyle: "content"
+        });
     });
-    });
+    function actualizarAcordeon(){
+        $("#accordion1").accordion({
+            heightStyle: "content"
+        });
+    };
+    
+    function doFunction($id){
+                var url = 'ABMMesa/php/setear_confirmar.php';
+		$.ajax({
+                    type:'POST',
+                    url:url,
+                    data:'id='+$id,
+                    success: function(datos){
+                            $('#contenido').html(datos);
+                            actualizarAcordeon();
+                    }
+                });
+                return false;
+    };
 </script>
 </head>
 <body>
     <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
     <header>Ver Mesas</header>
-    <div id="accordion1">
+    <div id="contenido" >
+        <div id="accordion1">
         <?php
             
             $acceso = new AccesoMySql();
@@ -35,26 +57,28 @@
                 <div style="height: auto !important">
                 <table class="table table-striped table-condensed table-hover">
                 <tr>
+                    <th width="300">id_mesa_plato</th>
                     <th width="300">id_plato</th>
                     <th width="200">nombre</th>
                     <th width="150">precio</th>
-                    <th width="150">descripcion</th>
-                    <th width="50">tipo</th>
+                    <th width="150">Confirma Cocina</th>
                 </tr>
                 <?php $acceso = new AccesoMySql();
-                $usuarios = $acceso->CargarPlatos();
+                $usuarios = $acceso->getPlatosMesaCocinero($mesa['id_mesa']);
                 foreach ($usuarios as $usuario){?>
                     <tr>
+                        <td><?php echo $usuario['id_mesa_plato']; ?></td>
                         <td><?php echo $usuario['id_plato']; ?></td>
                         <td><?php echo $usuario['nombre']; ?></td>
                         <td><?php echo $usuario['precio']; ?></td>
-                        <td><?php echo $usuario['descripcion']; ?></td>
-                        <td><?php echo $usuario['tipo']; ?></td>
+                        <td> <button id="confirmarComida" onclick="doFunction(<?php echo $usuario['id_mesa_plato']; ?>);" type="button" class="btn btn-success" > Comida Pronta</button> </td>
                     </tr>
                 <?php } ?>
                 </table></div>
            <?php } ?>
        
+        </div>
+        
     </div>
     <?php }else{ ?>
         <h1> Tiene que ser Administrador para ver esta pagina</h1>
