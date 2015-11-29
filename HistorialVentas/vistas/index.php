@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tienda</title>
-<script src="ABMComidas/js/myjava.js"></script>
+<script src="HistorialVentas/js/myjava.js"></script>
 
   <style>
   #feedback { font-size: 1.4em; }
@@ -28,12 +28,12 @@
     <section>
     <table border="0" align="center">
     	<tr>
-            <td width="500"><input type="text" placeholder="Buscar: por Fecha" id="bs-comida"/></td>
+            <td width="500"><input type="text" placeholder="Buscar: por Fecha" id="bs-historial"/></td>
         </tr>
     </table>
     </section>
 
-    <div class="container-fluid" id="agrega-comidas">
+    <div class="container-fluid" id="historialVenta">
         <div class="row">
             <div class="col-sm-6">
                 <table class="table table-striped table-condensed table-hover">
