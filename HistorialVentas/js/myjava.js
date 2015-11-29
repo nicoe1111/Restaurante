@@ -1,6 +1,5 @@
 $(function(){
 	$('#nueva-comida').on('click',function(){
-                $('#archivo').removeAttr('src', '');
 		$('#formularioComida')[0].reset();
 		$('#proComida').val('Registro');
                 $('#id').prop("readonly", false);
@@ -25,12 +24,29 @@ $(function(){
 	});
 	return false;
 	});
-	
+        
+
+    $( "#selectable" ).selectable();
+
 });
 
 function agregaComida(){
 	var url = 'ABMComidas/php/agrega_comida.php';
-        var fd = new FormData(document.getElementById("formularioComida"));
+
+        var fd = new FormData();
+//        var imagen = $("#imagen")[0].files[0];
+//        var nombre = $("#nombreComida")[0].files[0];
+//        var descripcion = $("#descripcion")[0].files[0];
+//        var precio = $("#precio")[0].files[0];
+//        var tipo = $("#tipoComida")[0].files[0];
+//        var proceso = $("#proComida")[0].files[0];
+        fd.append('id', $("#id"));
+        fd.append('imagen', $("#imagen")[0].files[0]);
+        fd.append('nombreComida', $("#nombreComida")[0]);
+        fd.append('descripcion', $("#descripcion")[0]);
+        fd.append('precio', $("#precio")[0]);
+        fd.append('tipoComida', $("#tipoComida")[0]);
+        fd.append('proComida', $("#proComida")[0]);
 
 	$.ajax({
 		type:'POST',
@@ -52,7 +68,7 @@ function agregaComida(){
 			return false;
 			}
 		}
-	})
+	});
 	return false;
 }
 
@@ -93,10 +109,7 @@ function editarComida(id){
 				$('#descripcion').val(datos[1]);
                                 $('#precio').val(datos[2]);
 				$('#tipoComida').val(datos[3]);
-                                $("div#conteinerImage").empty();
-                                $("div#conteinerImage").image("Imagenes/"+datos[4],function(){
-                                        
-                                });
+				$('#textImagen').val(datos[4]);
 				$('#registra-comida').modal({
 					show:true,
 					backdrop:'static'
@@ -106,28 +119,3 @@ function editarComida(id){
 	});
 	return false;
 }
-
-$.fn.image = function(src, f) {
-  return this.each(function() {
-    var i = new Image();
-    i.src = src;
-    i.onload = f;
-    i.name = "archivo";
-    i.id = "archivo";
-    i.height = 250;
-    i.width = 250;
-//    i.style = "width: 250px !important; height: 250px !important;";
-    this.appendChild(i);
-  });
-}
-
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      $('#archivo')
-        .attr('src', e.target.result)
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-} 

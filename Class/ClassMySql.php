@@ -58,6 +58,21 @@ function validarUsuario($user, $pass){
             return $Platos;  		
     }
     
+        function getHistorialVentas(){
+            $HistorialVentas = array();
+            $sql = mysql_query("SELECT * FROM historialventas ORDER BY fecha DESC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $HistorialVentas[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $HistorialVentas;  		
+    }
+    
     function crearPlato($nombreComida, $precio, $descripcionComida, $categoria, $imagen){
         $insertarPlato = "INSERT INTO plato(nombre, precio, descripcion, tipo, imagen) VALUES ('$nombreComida','$precio','$descripcionComida','$categoria','$imagen')";
         $sql = mysql_query($insertarPlato,$this->con);			
