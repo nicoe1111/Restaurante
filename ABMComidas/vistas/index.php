@@ -7,15 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tienda</title>
 <script src="ABMComidas/js/myjava.js"></script>
-<!--<link href="../../css/estiloModal.css" rel="stylesheet"/>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link href="../../bootstrap/css/bootstrap.css" rel="stylesheet"/>
-<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="../../bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
-<link href="../../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/>
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
-<script src="../../bootstrap/js/bootstrap.js"></script>-->
 </head>
 <body>
     <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>

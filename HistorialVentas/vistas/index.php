@@ -7,20 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tienda</title>
 <script src="HistorialVentas/js/myjava.js"></script>
-
-  <style>
-  #feedback { font-size: 1.4em; }
-  #selectable .ui-selecting { background: #FECA40; }
-  #selectable .ui-selected { background: #F39814; color: white; }
-  #selectable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
-  #selectable li { margin: 3px; padding: 1px; float: left; width: 100px; height: 80px; font-size: 4em; text-align: center; }
-  </style>
-  <script>
-  $(function() {
-    $( "#selectable" ).selectable();
-  });
-  </script>
-
 </head>
 <body>
     <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
@@ -35,7 +21,7 @@
 
     <div class="container-fluid" id="historialVenta">
         <div class="row">
-            <div class="col-sm-6">
+            <div>
                 <table class="table table-striped table-condensed table-hover">
                     <tr>
                         <th width="150">Mozo</th>
