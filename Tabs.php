@@ -1,22 +1,6 @@
 <!doctype html>
 <html lang="en">
     <head>
-        
-        
-<!--        <meta charset="utf-8">
-        <title>Tabs</title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        
-        <link href="css/estiloModal.css" rel="stylesheet"/>
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
-        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="bootstrap/js/bootstrap.js"></script>-->
-            
         <script>
             $(function() {
                 $( "#tabs" ).tabs();
