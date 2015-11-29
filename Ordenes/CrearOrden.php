@@ -5,6 +5,8 @@
     <head>
         <meta charset="utf-8">
         <title>jQuery UI Accordion - Default functionality</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        
         <link rel="stylesheet" href="css/Estilo.css" type="text/css">
         
         <style>
@@ -76,7 +78,7 @@
                                         total = total + (precioPlato*item.Cantidad);
                                         $('#tablaTotales').append('<tr id="tr'+i+'"><td id="cantidad'+i+'" class="tdM">' + item.Cantidad + '</td>\n\
                                         <td id="plato'+i+'" class="tdM">' + nombrePlato + '</td><td class="tdM">' + "$"+precioPlato + '</td>\n\
-                                        <td class="tdM"><center><input name="BorrarBtn" id="Borrar'+i+'" type="submit" value="Borrar" onclick="return z('+i+')"/></center> \n\
+                                        <td class="tdM"><center><input name="BorrarBtn" id="Borrar'+i+'" type="submit" value="Borrar" onclick="return borrar('+i+')"/></center> \n\
                                         <td id="TdId'+i+'" style="visibility:collapse;">' +idOrden+ '</td></td></tr>');
                                     });
                                     $('#tablaTotales').append('<tfoot><tr><td class="thM"></td><td class="thM">' + "TOTAL" + '</td><td class="thM">' + "$"+total + "</td></tr></tfoot>");
@@ -107,7 +109,6 @@
                     data: dataString,
                     cache: false,
                     success: function() {
-                             $("#myDiv").load(location.href+" #myDiv>*","");
                              }
 
                 });
@@ -159,20 +160,51 @@
           
           <script>
               
-              function z(a){
-              var td='TdId'+a;    
-              var dataString = document.getElementById(td).value;
+              function borrar(a){
+              var td='TdId'+a;
+              
+              var dataString = document.getElementById(td).innerHTML;
               $.ajax({
                     type: "POST",
                     url: "Ordenes/OrdenController.php",
-                    data: dataString,
+                    data: "BorrarOrden= " + dataString,
                     cache: false,
                     success: function() {
-                             
+                             alert("Pedido eliminado correctamente!");
                              }
 
                 });
               return false;
+              }
+          </script>
+          <script>
+              function terminar(){
+                  var i = 1;
+                  var result = '';
+                  var td = '';
+                  var aux='a';
+                  while(aux != null){
+                      td='TdId'+i;
+                      alert(td);
+                      aux = document.getElementById(td).textContent;
+                      alert(aux);
+                      result = result + aux;
+                      alert(result);
+                      i++;
+                      
+                  }
+                  alert(result);
+                  $.ajax({
+                    type: "POST",
+                    url: "Ordenes/OrdenController.php",
+                    data: "Finalizar= " + result,
+                    cache: false,
+                    success: function() {
+                             alert("!");
+                             }
+
+                });
+                  
               }
           </script>
           
@@ -208,22 +240,22 @@
                           <li class="ui-state-default">12</li>
                         </ol>  
                     </td>
-                    <td>
-                        <input type="submit" id="verMesa" name="verMesa" onclick="return y()"/>
+                    
                 </tr>
             </table>
-            <input type="submit" id="agregarPlato" name="agregarPlato" onclick="return x()"/>
+            <input type="submit" id="agregarPlato" name="agregarPlato" value="Agregar Plato" onclick="return x()"/>
             
         </form>
         <form name="form2" id="form2" action="?" method="POST"  enctype="multipart/form-data" >
-            <p>Holaaaaaaaaaa</p>
+            
             <div id="myDiv">
                 
             <table id="tablaTotales"  class="tableM">
                 
                     
             </table>
-            </div>    
+            </div> 
+            <input type="submit" id="finalizarMesa" name="finalizarMesa" value="Finalizar Mesa" onclick="return terminar()"/>
         </form>
         
     </body>
