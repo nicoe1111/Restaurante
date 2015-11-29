@@ -19,7 +19,7 @@ echo '<table class="table table-striped table-condensed table-hover">
 if(sizeof($comidas) >0){
 	foreach ($comidas as $comida){
                 echo '<tr>
-                        <td><p>'.$comida['nombre'].'</p></td>
+                        <td>'.$comida['nombre'].'</td>
                         <td>'.$comida['descripcion'].'</td>
                         <td>'.$comida['precio'].'</td>
                         <td>'.$comida['tipo'].'</td>

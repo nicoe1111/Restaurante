@@ -7,23 +7,19 @@ $nombre = $_POST['nombreComida'];
 $descripcion = $_POST['descripcion'];
 $precio = $_POST['precio'];
 $tipo = $_POST['tipoComida'];
-$imagen = $_FILES['imagen'];
+$imagen = $_FILES['imagen']['name'];
 //VERIFICAMOS EL PROCESO
-echo 'proceso'.$proceso[0];
-echo 'imagen'.$imagen;
-echo 'nombre'.$nombre;
-echo 'tipo'.$tipo;
 
     function cargarImagen(){
 
         if (!empty($_FILES['imagen']['name'])){
 
-              $MaxSubida = $_POST['MAX_FILE_SIZE'];
+              $MaxSubida = 4554227;
               $archivo = $_FILES["imagen"]["tmp_name"]; 
               $tamanio = $_FILES["imagen"]["size"];
               $tipo    = $_FILES["imagen"]["type"];
               $nombre  = $_FILES["imagen"]["name"];
-              $directorio = "Imagenes/";			
+              $directorio = "../../Imagenes/";			
               $directorio = $directorio . basename( $_FILES['imagen']['name']);
 
           if(!\file_exists($directorio)){
@@ -45,19 +41,19 @@ echo 'tipo'.$tipo;
 
 switch($proceso){
 	case 'Registro':
-            echo 'dfdaf'.$imagen;
             $acceso->crearPlato($nombre, $precio, $descripcion, $tipo, $imagen);
             cargarImagen();
 	break;
 	
 	case 'Edicion':
-            $acceso->ModificarPlato($id, $nombre, $precio, $descripcion, $tipo, $imagen);
+            if($imagen != ""){
+                $acceso->ModificarPlato($id, $nombre, $precio, $descripcion, $tipo, $imagen);
+            }else{
+                $acceso->ModificarPlatoSinImagen($id, $nombre, $precio, $descripcion, $tipo);
+            }
             cargarImagen();
 	break;
 }
-
-
-
 
 //ACTUALIZAMOS LOS REGISTROS Y LOS OBTENEMOS
 
@@ -74,7 +70,7 @@ echo '<table class="table table-striped table-condensed table-hover">
             </tr>';
 	foreach ($comidas as $comida){
                 echo '<tr>
-                        <td><p>'.$comida['nombre'].'</p></td>
+                        <td>'.$comida['nombre'].'</td>
                         <td>'.$comida['descripcion'].'</td>
                         <td>'.$comida['precio'].'</td>
                         <td>'.$comida['tipo'].'</td>

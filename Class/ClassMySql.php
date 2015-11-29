@@ -208,6 +208,14 @@ function ModificarPlato($id, $nombre, $precio, $descripcion, $tipo, $imagen){
                         echo 'iddddd'.$id;
 			return $sql;
 }
+
+function ModificarPlatoSinImagen($id, $nombre, $precio, $descripcion, $tipo){
+		$modificarUnidad = ("UPDATE plato SET nombre = '$nombre', precio = '$precio', descripcion = '$descripcion', tipo = '$tipo' WHERE id_plato = '$id'");
+			$sql = mysql_query($modificarUnidad,$this->con);			
+			mysql_close($this->con);
+                        echo 'iddddd'.$id;
+			return $sql;
+}
     
 function CargarMateria($Materia, $semestre){
     

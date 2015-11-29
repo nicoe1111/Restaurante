@@ -41,7 +41,7 @@
                     <tr>
                         <th width="150">Nombre</th>
                         <th width="100">Precio</th>
-                        <th width="80">Canditdad</th>
+                        <th width="80">Cantidad</th>
                     </tr>
                 <?php
 
