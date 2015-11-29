@@ -45,13 +45,19 @@
     <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
     <header>Ver Mesas</header>
     <div id="contenido" >
-        <div id="accordion1">
         <?php
-            
             $acceso = new AccesoMySql();
-            $mesas = $acceso->getAllMesas();
-            
-            foreach ($mesas as $mesa){?>
+            $mesas = $acceso->getMesasConPlatos();
+            if(sizeof($mesas)>0){
+        ?>
+        <div id="accordion1">
+        
+            <?php
+            foreach ($mesas as $mesa){
+                $acceso = new AccesoMySql();
+                $usuarios = $acceso->getPlatosMesaCocinero($mesa['id_mesa']);
+//                if(sizeof($usuarios)>0){
+            ?>
                 
                 <h3><?php echo $mesa['nombre']; ?></h3>
                 <div style="height: auto !important">
@@ -63,9 +69,11 @@
                     <th width="150">precio</th>
                     <th width="150">Confirma Cocina</th>
                 </tr>
-                <?php $acceso = new AccesoMySql();
-                $usuarios = $acceso->getPlatosMesaCocinero($mesa['id_mesa']);
-                foreach ($usuarios as $usuario){?>
+                <?php 
+                $total=0;
+                foreach ($usuarios as $usuario){
+                    $total = $total+$usuario['precio'];
+                ?>
                     <tr>
                         <td><?php echo $usuario['id_mesa_plato']; ?></td>
                         <td><?php echo $usuario['id_plato']; ?></td>
@@ -74,14 +82,20 @@
                         <td> <button id="confirmarComida" onclick="doFunction(<?php echo $usuario['id_mesa_plato']; ?>);" type="button" class="btn btn-success" > Comida Pronta</button> </td>
                     </tr>
                 <?php } ?>
-                </table></div>
-           <?php } ?>
+                </table><?php echo 'Precio Total ='.$total;?></div>
+            <?php // }
+                }
+            }else{
+              echo '<div class="alert alert-info"><strong>No hay mas encargos para el cocinero!</strong></div>';
+            } ?>
        
         </div>
         
     </div>
     <?php }else{ ?>
-        <h1> Tiene que ser Administrador para ver esta pagina</h1>
+    <div class="alert alert-danger" style="font: 30px Arial; height: 300px; text-align: center; vertical-align: central;">
+            <strong>Tiene que ser Administrador para ver esta pagina!</strong>
+        </div>
     <?php } ?>
 </body>
 </html>

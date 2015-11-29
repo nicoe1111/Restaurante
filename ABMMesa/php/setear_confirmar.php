@@ -6,13 +6,15 @@ $id = $_POST['id'];
 $acceso->setPlatosMesaConfirmar($id);
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
-        echo '<div id="accordion1">';
-            
+
         $acceso = new AccesoMySql();
-        $mesas = $acceso->getAllMesas();
-            
+        $mesas = $acceso->getMesasConPlatos();
+        if(sizeof($mesas)>0){
+        echo '<div id="accordion1">';
           foreach ($mesas as $mesa){
-                
+                $acceso = new AccesoMySql();
+                $usuarios = $acceso->getPlatosMesaCocinero($mesa['id_mesa']);
+               // if(sizeof($usuarios)>0){
           echo  '<h3> '.$mesa['nombre'].' </h3>
                 <div style="height: auto !important">
                 <table class="table table-striped table-condensed table-hover">
@@ -23,9 +25,9 @@ $acceso->setPlatosMesaConfirmar($id);
                     <th width="150">precio</th>
                     <th width="150">Confirma Cocina</th>
                 </tr>';
-                $acceso = new AccesoMySql();
-                $usuarios = $acceso->getPlatosMesaCocinero($mesa['id_mesa']);
+                $total=0;
                 foreach ($usuarios as $usuario){
+                    $total=$total+$usuario['precio'];
                 echo  '<tr>
                         <td>'.$usuario['id_mesa_plato'].'</td>
                         <td>'.$usuario['id_plato'].'</td>
@@ -34,6 +36,11 @@ $acceso->setPlatosMesaConfirmar($id);
                         <td> <button id="confirmarComida" onclick="doFunction('.$usuario['id_mesa_plato'].');" type="button" class="btn btn-success" > Comida Pronta</button> </td>
                     </tr>';
                  } 
-                echo '</table></div>';
+                echo '</table>Precio Total ='.$total.'</div>';
+                //}
+           
            }
-           echo '</div>';
+        echo '</div>';
+        }else{
+            echo '<div class="alert alert-info"><strong>No hay mas encargos para el cocinero!</strong></div>';
+         }

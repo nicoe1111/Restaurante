@@ -1,3 +1,4 @@
+<?php require_once '../../seguridad.php'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -17,6 +18,7 @@
 <script src="ABMUsuario/js/myjava.js"></script>
 </head>
 <body>
+    <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
     <header>Gestionar Usuarios</header>
     <section>
     <table border="0" align="center">
@@ -107,6 +109,10 @@
           </div>
         </div>
       </div>
-    
+    <?php }else{ ?>
+        <div class="alert alert-danger">
+            <strong>Tiene que ser Administrador para ver esta pagina!</strong>
+        </div>
+    <?php } ?>
 </body>
 </html>
