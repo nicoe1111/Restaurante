@@ -4,7 +4,7 @@ $acceso = new AccesoMySql();
 $dato = $_POST['dato'];
 
 //EJECUTAMOS LA CONSULTA DE BUSQUEDA
-$historialVentas = $acceso->FiltrarComida($dato);
+$historialVentas = $acceso->FiltrarHistorialVenta($dato);
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
 
