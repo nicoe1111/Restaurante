@@ -36,7 +36,10 @@
                 });
                 $( "#pedidosMesa" ).click(function(evt) {
                     $( "#contenedor" ).load("ABMPedidoMesa/vistas/index.php")
-                });                  
+                });  
+                $( "#historialVentas" ).click(function(evt) {
+                    $( "#contenedor" ).load("HistorialVentas/vistas/index.php")
+                });                 
             });
     </script>
 </head>
@@ -51,6 +54,7 @@
         <li><a id="getionComida" href="3" data-toggle="tab">Administrar comidas</a></li>
         <li><a id="getionComida" href="3" data-toggle="tab">Administrar comidas</a></li>
         <li><a id="pedidosMesa" href="#" data-toggle="tab">Pedidos Mesa</a></li>
+        <li><a id="historialVentas" href="#" data-toggle="tab">Historial Ventas</a></li>
     </ul>
         
         
