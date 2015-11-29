@@ -93,7 +93,7 @@
         
     </div>
     <?php }else{ ?>
-    <div class="alert alert-danger" style="font: 30px Arial; height: 300px; text-align: center; vertical-align: central;">
+    <div class="alert alert-danger">
             <strong>Tiene que ser Administrador para ver esta pagina!</strong>
         </div>
     <?php } ?>

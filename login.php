@@ -43,7 +43,7 @@
 
 <?php }else{ ?>
     <center><h1> SE HA LOGEADO COMO <?php echo " ".$_SESSION["loged"]; ?> - <?php echo $_SESSION["usuario"]; ?></h1></center>
-    <center><div align="right"><a href="?logout=1">Cerrar Sesion</a></div></center>
+    <center><div align="right" style="margin-right: 30px"><a href="?logout=1"><input type="submit" class="btn btn-primary" value="Cerrar Sesion"/></a></div></center>
 <?php } ?>
 
 </body>
