@@ -8,12 +8,16 @@
 <script>
     $(function() {
         $("#accordion1").accordion({
-            heightStyle: "content"
+            heightStyle: "content",
+            active: true, 
+            collapsible: true
         });
     });
     function actualizarAcordeon(){
         $("#accordion1").accordion({
-            heightStyle: "content"
+            heightStyle: "content",
+            active: true, 
+            collapsible: true
         });
     };
     
