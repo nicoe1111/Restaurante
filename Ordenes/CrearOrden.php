@@ -79,7 +79,7 @@
                                         $('#tablaTotales').append('<tr id="tr'+i+'"><td id="cantidad'+i+'" class="tdM">' + item.Cantidad + '</td>\n\
                                         <td id="plato'+i+'" class="tdM">' + nombrePlato + '</td><td class="tdM">' + "$"+precioPlato + '</td>\n\
                                         <td class="tdM"><center><input name="BorrarBtn" id="Borrar'+i+'" type="submit" value="Borrar" onclick="return borrar('+i+')"/></center> \n\
-                                        <td id="TdId'+i+'" style="visibility:collapse;">' +idOrden+ '</td></td></tr>');
+                                        <td id="TdId'+i+'" style="visibility:collapse;" class="idTerminar">' +idOrden+ '</td></td></tr>');
                                     });
                                     $('#tablaTotales').append('<tfoot><tr><td class="thM"></td><td class="thM">' + "TOTAL" + '</td><td class="thM">' + "$"+total + "</td></tr></tfoot>");
                                      
@@ -183,29 +183,30 @@
                   var result = '';
                   var td = '';
                   var aux='a';
-                  while(aux != null){
-                      td='TdId'+i;
-                      alert(td);
-                      aux = document.getElementById(td).textContent;
-                      alert(aux);
-                      result = result + aux;
-                      alert(result);
-                      i++;
-                      
-                  }
+                  var x = document.getElementsByClassName("idTerminar");
+                  alert(x);
+                  alert(x.length);
+                  var text[];
+                  var len = x.length;
+                  for (i = 0; i < len; i++) { 
+                        text[i] = x[i].innerHTML;
+                        alert(text);
+                    }
+                  alert(text);
+
                   alert(result);
                   $.ajax({
                     type: "POST",
                     url: "Ordenes/OrdenController.php",
-                    data: "Finalizar= " + result,
+                    data: text,
                     cache: false,
                     success: function() {
                              alert("!");
                              }
 
                 });
-                  
-              }
+                return false;
+            }
           </script>
           
     </head>

@@ -368,6 +368,18 @@ function getAllMesas(){
             mysql_close($this->con);
             return $sql;
     }
+    function eliminarOrden($id){
+        $deletePlato = "DELETE FROM mesa_plato WHERE id_mesa_plato='$id'";
+        $sql = mysql_query($deletePlato,$this->con);	
+	if ($sql){
+            echo "Se elimino la orden correctamente";
+	}else{
+            echo "ERROR: en la consulta con la base de datos";	
+	}
+        mysql_close($this->con);
+        return $sql;
+}
+    
 }
 
 ?>
