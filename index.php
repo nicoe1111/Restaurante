@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="css/Estilo.css" type="text/css" />
 <body style="box-shadow: #000000">
     
+    <div>
     <?php if(isset($_SESSION["loged"]))
             {
                include("Tabs.php");
@@ -28,5 +29,6 @@
               echo '<br/><br/>';
             }
     ?>
+    </div>
 </body>
 </html>

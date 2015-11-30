@@ -15,7 +15,7 @@ $acceso->setPlatosMesaConfirmar($id);
                 $acceso = new AccesoMySql();
                 $usuarios = $acceso->getPlatosMesaCocinero($mesa['id_mesa']);
                // if(sizeof($usuarios)>0){
-          echo  '<h3> '.$mesa['nombre'].' </h3>
+          echo  '<h3> Mesa '.$mesa['id_mesa'].' </h3>
                 <div style="height: auto !important">
                 <table class="table table-striped table-condensed table-hover">
                 <tr>

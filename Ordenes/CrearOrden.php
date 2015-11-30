@@ -14,7 +14,7 @@
           #platos .ui-selecting { background: #2aabd2; }
           #platos .ui-selected { background: #28a4c9; color: white; }
           #platos { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-          #platos li { margin: 3px; padding: 0.4em; font-size: 1em; height: 25px; }
+          #platos li { margin: 3px; padding: 0em; font-size: 1em; height: 25px; text-align: center;}
           
           #mesas .ui-selecting { background: #2aabd2; }
           #mesas .ui-selected { background: #28a4c9; color: white; }
@@ -73,7 +73,7 @@
                                 url: "Ordenes/OrdenController.php",
                                 data: mesa,
                                 dataType: "json",
-                                success: function(response){
+                                success: function recargar(response){
                                     var total=0;
                                     var i=0;
                                     $('#tablaTotales').html('');
@@ -87,7 +87,7 @@
                                         total = total + (precioPlato*item.Cantidad);
                                         $('#tablaTotales').append('<tr id="tr'+i+'"><td id="cantidad'+i+'" class="tdM">' + item.Cantidad + '</td>\n\
                                         <td id="plato'+i+'" class="tdM">' + nombrePlato + '</td><td class="tdM">' + "$"+precioPlato + '</td>\n\
-                                        <td class="tdM"><center><input name="BorrarBtn" id="Borrar'+i+'" type="submit" value="Borrar" onclick="return borrar('+i+')"/></center> \n\
+                                        <td class="tdM"><center><input name="BorrarBtn" class="btn btn-xs btn-danger" id="Borrar'+i+'" type="submit" value="Borrar" onclick="return borrar('+i+')"/></center> \n\
                                         <td id="TdId'+i+'" style="display:none;" class="idTerminar">' +idOrden+ '</td></td></tr>');
                                     });
                                     $('#tablaTotales').append('<tfoot><tr><td class="thM"></td><td class="thM"><b>' + "TOTAL" + '</b></td><td class="thM"><b>' + "$"+total + '</b></td><td class="thM"></td><td class="thM"></td></tr></tfoot>');
@@ -120,17 +120,14 @@
               var idMesa = document.getElementById('idMesa').value;
               var cantidad = document.getElementById('cantidad').value;
               var dataString = 'idPlato=' + idPlato + '&idMesa=' + idMesa + '&cantidad=' + cantidad;
-              
                 $.ajax({
                     type: "POST",
                     url: "Ordenes/OrdenController.php",
                     data: dataString,
                     cache: false,
-                    success: function() {
-                                document.getElementById('formOrden').find('input:text, input:password, input:file, select, textarea').val('');
-                                document.getElementById('formOrden').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
-                             }
-
+                    success: function(datos) {
+                            $('#mesas .ui-selected').click();
+                    }
                 });
               return false;
               }
@@ -153,11 +150,12 @@
                     cache: false,
                     success: function() {
                              alert("Pedido eliminado correctamente!");
+                             $('#mesas .ui-selected').click();
                              }
 
                 });
               return false;
-              }
+              };
           </script>
           <script>
               function terminar(){
@@ -173,23 +171,24 @@
                   $.ajax({
                     type: "POST",
                     url: "Ordenes/OrdenController.php",
-                    data: {idTerminar:res},
                     cache: false,
+                    data: {idTerminar:res},
                     success: function() {
                              alert("Orden enviada para cobro correctamente!");
+                             $('#mesas .ui-selected').click();
                              }
 
+                  
                   });
-                return false;
+                  return false;
             }
           </script>
           
     </head>
     <body>
         <form name="formOrden" id="formOrden" method="POST" >
-            <table style="width:70%">
-                <tr>
-                    <td width="70%">
+            <div class="row">
+                <div class="col-sm-4">
                         <label for="platos"><h2>Platos:</h2></label>
                         <ol id="platos">
                             <input type="hidden" id="idPlato" name="idPlato" value="" />
@@ -197,32 +196,31 @@
                             <li id="<?php echo $plato['id_plato']; ?>" class="ui-widget-content"><?php echo $plato['nombre']; ?> $<?php echo $plato['precio']; ?></li>
                             <?php } ?>
                         </ol>
-                <labale for="cantidad"><b>Cantidad:</b></labale>
-                <input type="number" min="0" name="cantidad" id="cantidad" value="0"/>
-                        
-                    </td>
-                    <td>
-                        <input type="hidden" id="idMesa" name="idMesa" value="" onchange=""/>
-                        <label for="mesas"><h2>Mesas:</h2></label>
-                        <ol id="mesas">
-                          <li class="ui-state-default">1</li>
-                          <li class="ui-state-default">2</li>
-                          <li class="ui-state-default">3</li>
-                          <li class="ui-state-default">4</li>
-                          <li class="ui-state-default">5</li>
-                          <li class="ui-state-default">6</li>
-                          <li class="ui-state-default">7</li>
-                          <li class="ui-state-default">8</li>
-                          <li class="ui-state-default">9</li>
-                          <li class="ui-state-default">10</li>
-                          <li class="ui-state-default">11</li>
-                          <li class="ui-state-default">12</li>
-                        </ol>  
-                    </td>
+                        <labale for="cantidad"><b>Cantidad:</b></labale>
+                        <input type="number" min="1" name="cantidad" id="cantidad" value="1"/>
+                        <input type="submit" id="agregarPlato" name="agregarPlato" value="Agregar Plato" onclick="return agregar()" class="btn btn-info btn-sm"/>
+                </div>
+                <div class="col-sm-6">
+                    <input type="hidden" id="idMesa" name="idMesa" value="" onchange=""/>
+                    <label for="mesas"><h2>Mesas:</h2></label>
+                    <ol id="mesas">
+                        <li class="ui-state-default">1</li>
+                        <li class="ui-state-default">2</li>
+                        <li class="ui-state-default">3</li>
+                        <li class="ui-state-default">4</li>
+                        <li class="ui-state-default">5</li>
+                        <li class="ui-state-default">6</li>
+                        <li class="ui-state-default">7</li>
+                        <li class="ui-state-default">8</li>
+                        <li class="ui-state-default">9</li>
+                        <li class="ui-state-default">10</li>
+                        <li class="ui-state-default">11</li>
+                        <li class="ui-state-default">12</li>
+                    </ol>  
+                            
                     
-                </tr>
-            </table>
-            <input type="submit" id="agregarPlato" name="agregarPlato" value="Agregar Plato" onclick="return agregar()"/>
+                </div>
+            </div>
             
         </form>
         <div id="myDiv">
@@ -235,10 +233,11 @@
                     
             </table>
             </div> 
-            <input type="submit" id="finalizarMesa" name="finalizarMesa" value="Finalizar Mesa" onclick="return terminar()"/>
+            <input type="submit" id="finalizarMesa" name="finalizarMesa" value="Finalizar Mesa" onclick="return terminar()" class="btn  btn-success btn-sm"/>
         </form>
         </div>
         
     </body>
 </html>
 
+                    
