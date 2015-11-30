@@ -20,11 +20,12 @@
     
     <?php if(isset($_SESSION["loged"]))
             {
-              require_once ("inicio.php"); 
-
+               include("Tabs.php");
+               echo '<br/><br/>';
             }else{ 
               Require_once("login.php");
-              Require_once("Inicio.php"); 
+              include("Tabs.php");
+              echo '<br/><br/>';
             }
     ?>
 </body>
