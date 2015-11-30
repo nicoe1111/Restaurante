@@ -111,7 +111,7 @@
       </div>
     <?php }else{ ?>
         <div class="alert alert-danger">
-            <strong>Tiene que ser Administrador para ver esta pagina!</strong>
+            <strong>Tiene que ser Cajero para ver esta pagina!</strong>
         </div>
     <?php } ?>
 </body>

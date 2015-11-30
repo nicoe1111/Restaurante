@@ -4,15 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Tienda</title>
-<!--<link href="css/estiloModal.css" rel="stylesheet"/>-->
-<!--<script src="ABMUsuario/js/jquery.js"></script>-->
-<!--<link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
-<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="bootstrap/js/bootstrap.js"></script>-->
 <?php require_once("../../Class/ClassMySql.php"); ?>
 <script>
     $(function() {
@@ -42,7 +33,7 @@
 </script>
 </head>
 <body>
-    <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
+    <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cocina"){ ?>
     <header>Ver Mesas</header>
     <div id="contenido" >
         <?php
@@ -86,7 +77,9 @@
             <?php // }
                 }
             }else{
-              echo '<div class="alert alert-info"><strong>No hay mas encargos para el cocinero!</strong></div>';
+              echo '<div class="alert alert-danger">
+                        <strong>Tiene que ser Mozo para ver esta pagina!</strong>
+                    </div>';
             } ?>
        
         </div>
@@ -94,7 +87,7 @@
     </div>
     <?php }else{ ?>
     <div class="alert alert-danger">
-            <strong>Tiene que ser Administrador para ver esta pagina!</strong>
+            <strong>Tiene que ser Cocinero para ver esta pagina!</strong>
         </div>
     <?php } ?>
 </body>
