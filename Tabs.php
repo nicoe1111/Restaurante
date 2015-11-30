@@ -1,54 +1,68 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Tabs</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-  $(function() {
-    $( "#tabs" ).tabs();
-  });
-  </script>
+    <head>
+        
+        
+<!--        <meta charset="utf-8">
+        <title>Tabs</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        
+        <link href="css/estiloModal.css" rel="stylesheet"/>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet"/>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+        <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet"/>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>-->
+            
+        <script>
+            $(function() {
+                $( "#tabs" ).tabs();
+            });
+            $(function() {
+                $( "#gestionUsuario" ).click(function(evt) {
+                    $( "#contenedor" ).load("ABMUsuario/vistas/index.php")
+                });
+                $( "#verMesas" ).click(function(evt) {
+                    $( "#contenedor" ).load("ABMMesa/vistas/index.php")
+                });
+                $( "#PlatosDetalles" ).click(function(evt) {
+                    $( "#contenedor" ).load("PlatosDetalles.php")
+                });
+                $( "#getionComida" ).click(function(evt) {
+                    $( "#contenedor" ).load("ABMComidas/vistas/index.php")
+                });
+                $( "#pedidosMesa" ).click(function(evt) {
+                    $( "#contenedor" ).load("ABMPedidoMesa/vistas/index.php")
+                });  
+                $( "#historialVentas" ).click(function(evt) {
+                    $( "#contenedor" ).load("HistorialVentas/vistas/index.php")
+                });
+                $( "#ordenes" ).click(function(evt) {
+                    $( "#contenedor" ).load("Ordenes/CrearOrden.php")
+                }); 
+            });
+    </script>
 </head>
 <body>
- 
-    <div id="tabs" class="contenedor">
-  <ul>
-    <li><a href="#tabs-1">Ver carta comidas</a></li>
-    <li><a href="#tabs-2">Ver mesas</a></li>
-    <li><a href="#tabs-3">Cerrar mesa</a></li>
-    <li><a href="#tabs-4">Historial de ventas</a></li>
-    <li><a href="#tabs-5">Confirmar plato</a></li>
-    <li><a href="#tabs-6">Administrar comidas</a></li>
-    <li><a href="#tabs-7">Gestion Usuario</a></li>
-  </ul>
-  <div id="tabs-1">
-    <?php include("PlatosDetalles.php"); ?>
-  </div>
-  <div id="tabs-2">
-    <p>Aca lista de mesas con detalle de compras</p>
-  </div>
-  <div id="tabs-3">
-    <p>Aca session de cajero lista de mesas abiertas y puede cerrar</p>
-  </div>
-  <div id="tabs-4">
-    <p>Historial de ventas</p>
-  </div>
-  <div id="tabs-5">
-    <p>Cocinero ve los pedidos y los confirma</p>
-  </div>
-  <div id="tabs-6">
-    <?php Require_once("AdmComidas.php");?>
-  </div>
-  <div id="tabs-7">
-    <?php Require_once("ABMUsuario/ABMUsuario.php");?>
-  </div>
-
-</div>
- 
- 
+    
+    <ul class="nav nav-tabs">
+        <li class="active"><a id="PlatosDetalles" href="PlatosDetalles.php" data-toggle="tab">Ver carta comidas</a></li>
+        <li><a id="verMesas" href="#" data-toggle="tab">Ver mesas</a></li>
+        <li><a href="#" data-toggle="tab">Cerrar</a></li>
+        <li><a href="#" data-toggle="tab">Confirmar plato</a></li>
+        <li><a id="getionComida" href="#" data-toggle="tab">Administrar comidas</a></li>
+        <li><a id="gestionUsuario" href="#" data-toggle="tab">Gestion Usuarios</a></li>
+        <li><a id="pedidosMesa" href="#" data-toggle="tab">Pedidos Mesa</a></li>
+        <li><a id="historialVentas" href="#" data-toggle="tab">Historial Ventas</a></li>
+        <li><a id="ordenes" href="#" data-toggle="tab">Ordenes</a></li>
+    </ul>
+        
+        
+    <div id="contenedor">
+        <?php include 'PlatosDetalles.php'; ?>
+    </div>
 </body>
 </html>
