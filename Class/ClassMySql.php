@@ -58,6 +58,37 @@ function validarUsuario($user, $pass){
             return $Platos;  		
     }
     
+        function CargarCategoriaPlatos(){
+            $Platos = array();
+            $sql = mysql_query("SELECT p.tipo FROM plato p GROUP BY p.tipo ORDER BY tipo ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Platos[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Platos;  		
+    }
+    
+    
+       function CargarPlatosCategoria($categoria){
+            $Platos = array();
+            $sql = mysql_query("SELECT * FROM plato WHERE tipo = '$categoria'  ORDER BY tipo ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Platos[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Platos;  		
+    }
+    
         function getHistorialVentas(){
             $HistorialVentas = array();
             $sql = mysql_query("SELECT * FROM historialventas ORDER BY fecha DESC", $this->con);
@@ -162,17 +193,8 @@ function CargarUsuarioUser($user){
 		mysql_free_result($sql);
 		return $ArrayUser;  		
 }
-    
-function InsertarTema_Unidad($nombrePractico, $Id_materia){
-    
-		$insertarUnidad = "INSERT INTO practicos(Nombre, Id_Materia) VALUES ('$nombrePractico','$Id_materia')";
-			$sql = mysql_query($insertarUnidad,$this->con);			
-			mysql_close($this->con);
-			return $sql;
-}
-    
+
 function InsertarUsuario($nombre, $apellido, $CI, $pass, $tipo){
-    
 		$insertarUnidad = "INSERT INTO usuario(nombre, apellido, cedula, pass, tipoUser) VALUES ('$nombre','$apellido','$CI','$pass','$tipo')";
 			$sql = mysql_query($insertarUnidad,$this->con);			
 			mysql_close($this->con);

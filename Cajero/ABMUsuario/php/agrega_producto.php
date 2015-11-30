@@ -8,15 +8,17 @@ $apellido = $_POST['apellido'];
 $tipo = $_POST['tipo'];
 $pass = $_POST['pass'];
 //VERIFICAMOS EL PROCESO
-echo "proceso =".$proceso;
+
 switch($proceso){
 	case 'Registro':
-            $acceso->InsertarUsuario($nombre, $apellido, $cedula, $pass, $tipo);
+            $passMd5 = md5($pass);
+            $acceso->InsertarUsuario($nombre, $apellido, $cedula, $passMd5, $tipo);
 //		mysql_query("INSERT INTO usuario (cedula, nombre, precio_unit, precio_dist, fecha_reg)VALUES('$cedula','$nombre','$tipo','$precio_uni','$pass', '$fecha')");
 	break;
 	
 	case 'Edicion':
-		$acceso->ModificarUsuario($nombre, $apellido, $cedula, $pass, $tipo);
+             $passMd5 = md5($pass);
+             $acceso->ModificarUsuario($nombre, $apellido, $cedula, $passMd5, $tipo);
 	break;
 }
 

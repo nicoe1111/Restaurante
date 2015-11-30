@@ -11,11 +11,11 @@ if(isset($_POST['enviar'])){
 		
 		$exist = false;
 		$acceso = new AccesoMySql();
-		$exist = $acceso->validarUsuario($usuario, $clave);
+                $passMd5 = md5($clave);
+		$exist = $acceso->validarUsuario($usuario, $passMd5);
 	
 	if ($exist != ""){
 		$_SESSION["usuario"] = $usuario;
-		$_SESSION["clave"] = $clave;
 		$_SESSION["loged"] = $exist;
 		$_SESSION["id"] = $exist["Id"];
 		header ("location: index.php?tipo=".$_SESSION["loged"]."&user=".$_SESSION["usuario"]);
