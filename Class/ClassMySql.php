@@ -378,6 +378,23 @@ function getAllMesas(){
 	}
         mysql_close($this->con);
         return $sql;
+    }
+    function terminarOrden($terminar){
+        foreach($terminar as $i){
+            $sql = mysql_query("UPDATE `mesa_plato` SET `conf_mozo` = '1' WHERE `mesa_plato`.`id_mesa_plato` = '$i';", $this->con);
+        }
+        
+        mysql_close($this->con);
+        return $sql; 
+    }
+    
+    
+    
+   
+    
+        
+        
+    
 }
     
     //Cajero-Cobrar//
