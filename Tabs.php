@@ -16,6 +16,9 @@
                 $( "#historialVentas" ).click(function(evt) {
                     $( "#contenedor" ).load("Cajero/HistorialVentas/vistas/index.php")
                 });
+                $( "#cobrar" ).click(function(evt) {
+                    $( "#contenedor" ).load("Cajero/Cobrar/vistas/index.php")
+                });
                 /////////////////////////////
                 $( "#verMesas" ).click(function(evt) {
                     $( "#contenedor" ).load("Cocina/vistas/index.php")
@@ -42,6 +45,7 @@
         <li><a id="getionComida" href="#" data-toggle="tab">Administrar comidas</a></li>
         <li><a id="gestionUsuario" href="#" data-toggle="tab">Gestion Usuarios</a></li>
         <li><a id="historialVentas" href="#" data-toggle="tab">Historial Ventas</a></li>
+        <li><a id="cobrar" href="#" data-toggle="tab">Cobrar</a></li>
         <?php } ?>
         <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Mozo"){ ?>
             <li><a id="ordenes" href="#" data-toggle="tab">Ordenes</a></li>
