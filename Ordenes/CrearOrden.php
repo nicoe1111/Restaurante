@@ -49,6 +49,15 @@
                   }
                 });
               });
+              $(function() {
+                $("#platos").selectable({
+                      selecting: function(event, ui){
+                            if( $("#platos .ui-selected, #platos .ui-selecting").length > 1){
+                                  $(ui.selecting).removeClass("#platos ui-selecting");
+                            }
+                      }
+                });
+               });
           </script>
           <script>
           var php_var = <?php echo json_encode($ArrayPlatos); ?>;    
@@ -94,6 +103,15 @@
                 }
             });
           });
+          $(function() {
+                $("#mesas").selectable({
+                      selecting: function(event, ui){
+                            if( $("#mesas .ui-selected, #mesas .ui-selecting").length > 1){
+                                  $(ui.selecting).removeClass("#mesas ui-selecting");
+                            }
+                      }
+                });
+         });
           </script>
           <script>
               var php_var = <?php echo json_encode($ArrayPlatos); ?>;  
