@@ -50,7 +50,7 @@
 //                if(sizeof($usuarios)>0){
             ?>
                 
-                <h3><?php echo $mesa['nombre']; ?></h3>
+                <h3>Mesa <?php echo $mesa['id_mesa']; ?></h3>
                 <div style="height: auto !important">
                 <table class="table table-striped table-condensed table-hover">
                 <tr>

@@ -320,7 +320,7 @@ function getAllMesas(){
     
     function getMesasConPlatos(){
             $Mesa = array();
-            $sql = mysql_query("SELECT m.* FROM mesa m JOIN mesa_plato mp ON m.id_mesa = mp.id_mesa WHERE mp.conf_cocina is false GROUP BY m.id_mesa ORDER BY m.nombre ASC", $this->con);
+            $sql = mysql_query("SELECT * FROM mesa_plato mp WHERE mp.conf_cocina is false GROUP BY mp.id_mesa ORDER BY mp.id_mesa ASC", $this->con);
             if ($sql){
                 while ($lista = mysql_fetch_array($sql)){
                       $Mesa[] = $lista;
@@ -413,7 +413,7 @@ function getAllMesas(){
     //Cajero-Cobrar//
     function getMesasCobrar(){
             $Mesa = array();
-            $sql = mysql_query("SELECT m.* FROM mesa m JOIN mesa_plato mp ON m.id_mesa = mp.id_mesa WHERE mp.conf_cocina is true AND mp.conf_mozo is true AND mp.conf_caja is false GROUP BY m.id_mesa ORDER BY m.nombre ASC", $this->con);
+            $sql = mysql_query("SELECT * FROM mesa_plato mp WHERE mp.conf_cocina is true AND mp.conf_mozo is true AND mp.conf_caja is false GROUP BY mp.id_mesa ORDER BY mp.id_mesa ASC", $this->con);
             if ($sql){
                 while ($lista = mysql_fetch_array($sql)){
                       $Mesa[] = $lista;
@@ -428,7 +428,7 @@ function getAllMesas(){
     
     function getMososMesaCobrar($id){
             $Mesa = array();
-            $sql = mysql_query("SELECT u.cedula, u.nombre, u.apellido , SUM(precio*Cantidad) as total FROM mesa m JOIN mesa_plato mp ON m.id_mesa = mp.id_mesa JOIN plato p ON mp.id_plato = p.id_plato JOIN usuario u ON u.cedula = mp.Mozo WHERE mp.conf_cocina is true AND mp.conf_mozo is true AND mp.id_mesa = '$id' AND mp.conf_caja is false GROUP BY mp.Mozo ORDER BY m.nombre ASC", $this->con);
+            $sql = mysql_query("SELECT u.cedula, u.nombre, u.apellido , SUM(precio*Cantidad) as total FROM mesa_plato mp JOIN plato p ON mp.id_plato = p.id_plato JOIN usuario u ON u.cedula = mp.Mozo WHERE mp.conf_cocina is true AND mp.conf_mozo is true AND mp.id_mesa = '$id' AND mp.conf_caja is false GROUP BY mp.Mozo ORDER BY mp.id_mesa ASC", $this->con);
             if ($sql){
                 while ($lista = mysql_fetch_array($sql)){
                       $Mesa[] = $lista;
@@ -441,8 +441,11 @@ function getAllMesas(){
             return $Mesa;  		
     }
 
-    function setMesaPlatoConfirmarCobro($id_mesa, $id_user){
+    function setMesaPlatoConfirmarCobro($id_mesa, $id_user, $total){
         $sql = mysql_query("UPDATE mesa_plato SET conf_caja = '1' WHERE id_mesa = '$id_mesa' AND Mozo = '$id_user' AND conf_cocina is true AND conf_mozo is true", $this->con);
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $fecha = date("Y/m/d");
+        $sql2 = mysql_query("INSERT INTO historialventas (idMozo, idMesa, precioTotal, fecha) VALUES ('$id_user','$id_mesa','$total', '$fecha')", $this->con);
         mysql_close($this->con);
         return $sql; 
     }

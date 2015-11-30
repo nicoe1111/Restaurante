@@ -3,8 +3,9 @@ require_once("../../../Class/ClassMySql.php");
 $acceso = new AccesoMySql();
 $id_mesa = $_POST['id_mesa'];
 $id_user = $_POST['id_user'];
+$total = $_POST['total'];
 
-$acceso->setMesaPlatoConfirmarCobro($id_mesa, $id_user);
+$acceso->setMesaPlatoConfirmarCobro($id_mesa, $id_user, $total);
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
   $acceso = new AccesoMySql();
@@ -20,7 +21,7 @@ $acceso->setMesaPlatoConfirmarCobro($id_mesa, $id_user);
 //                if(sizeof($usuarios)>0){
             ?>
                 
-                <h3><?php echo $mesa['nombre']; ?></h3>
+                <h3>Mesa <?php echo $mesa['id_mesa']; ?></h3>
                 <div style="height: auto !important">
                 <table class="table table-striped table-condensed table-hover">
                 <tr>

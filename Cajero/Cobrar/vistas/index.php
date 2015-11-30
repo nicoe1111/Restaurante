@@ -17,12 +17,12 @@
         });
     };
     
-    function doFunction($id_mesa, $id_user){
+    function doFunction($id_mesa, $id_user, $total){
                 var url = 'Cajero/Cobrar/php/setear_confirmar.php';
 		$.ajax({
                     type:'POST',
                     url:url,
-                    data: {id_mesa: $id_mesa, id_user: $id_user},
+                    data: {id_mesa: $id_mesa, id_user: $id_user, total: $total},
                     success: function(datos){
                             $('#contenido').html(datos);
                             actualizarAcordeon();
@@ -50,7 +50,7 @@
 //                if(sizeof($usuarios)>0){
             ?>
                 
-                <h3><?php echo $mesa['nombre']; ?></h3>
+                <h3>Mesa <?php echo $mesa['id_mesa']; ?></h3>
                 <div style="height: auto !important">
                 <table class="table table-striped table-condensed table-hover">
                 <tr>
@@ -67,7 +67,7 @@
                         <td><?php echo $usuario['nombre']; ?></td>
                         <td><?php echo $usuario['apellido']; ?></td>
                         <td><?php echo $usuario['total']; ?></td>
-                        <td> <button id="confirmarComida" onclick="doFunction(<?php echo $mesa['id_mesa'].', '.$usuario['cedula']; ?>)" type="button" class="btn btn-success" > Cobrar </button> </td>
+                        <td> <button id="confirmarComida" onclick="doFunction(<?php echo $mesa['id_mesa'].', '.$usuario['cedula'].', '.$usuario['total']; ?>)" type="button" class="btn btn-success" > Cobrar </button> </td>
                     </tr>
                 <?php } ?>
                 </table></div>
