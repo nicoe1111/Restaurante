@@ -31,15 +31,21 @@
     </script>
 </head>
 <body>
-    
     <ul class="nav nav-tabs">
         <li class="active"><a id="PlatosDetalles" href="PlatosDetalles.php" data-toggle="tab">Ver carta comidas</a></li>
+        <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cocina"){ ?>
         <li><a id="verMesas" href="#" data-toggle="tab">Ver mesas</a></li>
+        <?php } ?>
+        <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
         <li><a id="getionComida" href="#" data-toggle="tab">Administrar comidas</a></li>
         <li><a id="gestionUsuario" href="#" data-toggle="tab">Gestion Usuarios</a></li>
-        <li><a id="pedidosMesa" href="#" data-toggle="tab">Pedidos Mesa</a></li>
         <li><a id="historialVentas" href="#" data-toggle="tab">Historial Ventas</a></li>
-        <li><a id="ordenes" href="#" data-toggle="tab">Ordenes</a></li>
+        <?php } ?>
+        <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Mozo"){ ?>
+            <li><a id="ordenes" href="#" data-toggle="tab">Ordenes</a></li>
+        <?php } ?>
+        
+        
     </ul>
         
         
