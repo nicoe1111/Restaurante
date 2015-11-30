@@ -1,4 +1,4 @@
-<?php require_once("Includes/ProcesaInicio.php"); ?>
+<?php require_once("Class/ClassMySql.php");?>
     <head>
         <meta charset="utf-8">
         <title>jQuery UI Accordion - Default functionality</title>
@@ -14,7 +14,13 @@
     <body>
         
         <div id="accordion" >
-            <?php foreach ($ArrayPlatos as $ind=>$plato){ ?>
+            <?php 
+            
+            	$ObjAcceso = new AccesoMySql();		
+		$ArrayPlatos = array();
+		$ArrayPlatos = $ObjAcceso->CargarPlatos();
+                
+            foreach ($ArrayPlatos as $ind=>$plato){ ?>
             <h3><?php echo $plato['nombre']; ?></h3>
             <div>
                 <table>

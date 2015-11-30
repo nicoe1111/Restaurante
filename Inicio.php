@@ -1,6 +1,3 @@
-<?php	
-		include("Includes/ProcesaInicio.php");
-?>
 <table>
 <tr>
     <td>

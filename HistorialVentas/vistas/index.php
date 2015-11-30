@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>
-    <header>Gestionar Comidas</header>
+    <header>Historial de ventas</header>
     <section>
     <table border="0" align="center">
     	<tr>
