@@ -18,7 +18,7 @@
     };
     
     function doFunction($id){
-                var url = 'ABMMesa/php/setear_confirmar.php';
+                var url = 'Cocina/php/setear_confirmar.php';
 		$.ajax({
                     type:'POST',
                     url:url,

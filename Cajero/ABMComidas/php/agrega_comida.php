@@ -1,5 +1,5 @@
 <?php
-require_once("../../Class/ClassMySql.php");
+require_once("../../../Class/ClassMySql.php");
 $acceso = new AccesoMySql();
 $id = $_POST['id'];
 $proceso = $_POST['proComida'];

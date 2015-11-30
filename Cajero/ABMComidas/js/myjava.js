@@ -14,7 +14,7 @@ $(function(){
 	
 	$('#bs-comida').on('keyup',function(){
 		var dato = $('#bs-comida').val();
-		var url = 'ABMComidas/php/busca_comida.php';
+		var url = 'Cajero/ABMComidas/php/busca_comida.php';
 		$.ajax({
 		type:'POST',
 		url:url,
@@ -29,7 +29,7 @@ $(function(){
 });
 
 function agregaComida(){
-	var url = 'ABMComidas/php/agrega_comida.php';
+	var url = 'Cajero/ABMComidas/php/agrega_comida.php';
         var fd = new FormData(document.getElementById("formularioComida"));
 
 	$.ajax({
@@ -57,7 +57,7 @@ function agregaComida(){
 }
 
 function eliminarComida(id){
-	var url = 'ABMComidas/php/elimina_comida.php';
+	var url = 'Cajero/ABMComidas/php/elimina_comida.php';
 	var pregunta = confirm('¿Esta seguro de eliminar esta comida?');
 	if(pregunta==true){
 		$.ajax({
@@ -77,7 +77,7 @@ function eliminarComida(id){
 
 function editarComida(id){
 	$('#formularioComida')[0].reset();
-	var url = 'ABMComidas/php/edita_comida.php';
+	var url = 'Cajero/ABMComidas/php/edita_comida.php';
 		$.ajax({
 		type:'POST',
 		url:url,
