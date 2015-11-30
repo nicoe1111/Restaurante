@@ -47,7 +47,9 @@
         </div>
     </div>
     <?php }else{ ?>
-        <h1> Tiene que ser Administrador para ver esta pagina</h1>
+        <div class="alert alert-danger">
+            <strong>Tiene que ser Cajero para ver esta pagina!</strong>
+        </div>
     <?php } ?>
 </body>
 </html>
