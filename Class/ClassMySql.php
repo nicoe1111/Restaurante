@@ -388,15 +388,6 @@ function getAllMesas(){
         return $sql; 
     }
     
-    
-    
-   
-    
-        
-        
-    
-}
-    
     //Cajero-Cobrar//
     function getMesasCobrar(){
             $Mesa = array();

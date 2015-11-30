@@ -11,7 +11,7 @@
     $ObjAcceso = new AccesoMySql();		
     $ArrayPlatos = array();
     $ArrayPlatos = $ObjAcceso->CargarPlatos();
-    
+    $totalPedidos = array();
     if(isset($_POST['idPlato'])){
 
         $Plato = $_POST['idPlato'];
@@ -20,7 +20,6 @@
         $Usuario = $_SESSION["usuario"];
         $acceso = new AccesoMySql();
         $acceso->InsertarPlatoOrden($Plato, $Mesa, $CantidadPlato, $Usuario);
-        $totalPedidos = array();
         $totalPedidos = $acceso->CargarPedidos($Usuario, $Mesa);
         
         
@@ -30,7 +29,6 @@
             $acceso = new AccesoMySql();
             $Usuario = $_SESSION["usuario"];
             $Mesa = $_POST['Mesa'];
-            $totalPedidos = array();
             $totalPedidos = $acceso->CargarPedidos($Usuario, $Mesa);
             echo json_encode($totalPedidos);
         
@@ -43,11 +41,10 @@
     
     if(isset($_POST['idTerminar'])){
             $acceso = new AccesoMySql();
-            $Terminar = array();
             $Terminar = $_POST['idTerminar'];
             $acceso->terminarOrden($Terminar);
     }
     
 	
+    
 ?>
-
