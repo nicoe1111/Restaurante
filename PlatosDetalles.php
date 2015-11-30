@@ -5,12 +5,7 @@
         <script>
             $(function() {
                 $("#accordion").accordion({
-                    heightStyle: "200px",
-                    collapsible: true,
-                    active: true,
-                    activate: function( event, ui ) {
-                            $("#accordion").animate({ scrollTop: ui.newHeader.offset().top }, 'slow');
-                    }
+                    active: true
                 });
             });
         </script>
