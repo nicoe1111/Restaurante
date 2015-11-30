@@ -43,6 +43,7 @@ function agregaComida(){
 		success: function(registro){
 			if ($('#proComida').val() === 'Registro'){
 			$('#formularioComida')[0].reset();
+                        $('#proComida').val('Registro');
 			$('#mensaje').addClass('bien').html('Registro completado con exito').show(200).delay(2500).hide(200);
 			$('#agrega-comidas').html(registro);
 			return false;

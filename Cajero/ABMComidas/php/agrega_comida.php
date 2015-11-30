@@ -19,7 +19,7 @@ $imagen = $_FILES['imagen']['name'];
               $tamanio = $_FILES["imagen"]["size"];
               $tipo    = $_FILES["imagen"]["type"];
               $nombre  = $_FILES["imagen"]["name"];
-              $directorio = "../../Imagenes/";			
+              $directorio = "../../../Imagenes/";			
               $directorio = $directorio . basename( $_FILES['imagen']['name']);
 
           if(!\file_exists($directorio)){
@@ -34,7 +34,7 @@ $imagen = $_FILES['imagen']['name'];
                echo "NO se ha podido guardar el archivo en la base de datos. supera el tanio permitido ";
                }
                   header('Location:Inicio.php');
-                  }
+          }
       }
     }
 
