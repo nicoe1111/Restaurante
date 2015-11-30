@@ -35,7 +35,18 @@
             echo json_encode($totalPedidos);
         
     }
+    if(isset($_POST['BorrarOrden'])){
+            $acceso = new AccesoMySql();
+            $IdOrden = $_POST['BorrarOrden'];
+            $acceso->eliminarOrden($IdOrden);
+    }
     
+    if(isset($_POST['idTerminar'])){
+            $acceso = new AccesoMySql();
+            $Terminar = array();
+            $Terminar = $_POST['idTerminar'];
+            $acceso->terminarOrden($Terminar);
+    }
     
 	
 ?>

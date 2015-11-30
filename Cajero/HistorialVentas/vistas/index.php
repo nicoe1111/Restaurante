@@ -1,12 +1,12 @@
-<?php require_once("../../Class/ClassMySql.php");
-       require_once '../../seguridad.php';
+<?php require_once("../../../Class/ClassMySql.php");
+       require_once '../../../seguridad.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tienda</title>
-<script src="HistorialVentas/js/myjava.js"></script>
+<script src="Cajero/HistorialVentas/js/myjava.js"></script>
 </head>
 <body>
     <?php if(isset($_SESSION["loged"]) && $_SESSION["loged"]=="Cajero"){ ?>

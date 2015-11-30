@@ -73,7 +73,7 @@ text-decoration: none;
         
         /*
 
-#navigation a {
+/*#navigation a {
 	color: #FFF0C9;
 	line-height:17px;
 	letter-spacing:.1em;
@@ -83,7 +83,7 @@ text-decoration: none;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-weight: bold;
-	}
+	}*/
 	
 div {
   margin: .4em 0;
@@ -100,4 +100,4 @@ modificarPlato{
     font:18px Arial, Helvetica, sans-serif;
     color:#000000;	  
     text-decoration: none;
-}*/
+}

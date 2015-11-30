@@ -398,6 +398,33 @@ function getAllMesas(){
             mysql_close($this->con);
             return $sql;
     }
+    function eliminarOrden($id){
+        $deletePlato = "DELETE FROM mesa_plato WHERE id_mesa_plato='$id'";
+        $sql = mysql_query($deletePlato,$this->con);	
+	if ($sql){
+            echo "Se elimino la orden correctamente";
+	}else{
+            echo "ERROR: en la consulta con la base de datos";	
+	}
+        mysql_close($this->con);
+        return $sql;
+    }
+    function terminarOrden($terminar){
+        foreach($terminar as $i){
+            $sql = mysql_query("UPDATE `mesa_plato` SET `conf_mozo` = '1' WHERE `mesa_plato`.`id_mesa_plato` = '$i';", $this->con);
+        }
+        
+        mysql_close($this->con);
+        return $sql; 
+    }
+    
+    
+    
+   
+    
+        
+        
+    
 }
 
 ?>

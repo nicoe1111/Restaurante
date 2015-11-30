@@ -1,5 +1,5 @@
 <?php
-require_once("../../Class/ClassMySql.php");
+require_once("../../../Class/ClassMySql.php");
 $acceso = new AccesoMySql();
 $cedula = $_POST['cedula'];
 $proceso = $_POST['pro'];

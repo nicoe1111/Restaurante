@@ -13,7 +13,7 @@ $(function(){
 	
 	$('#bs-prod').on('keyup',function(){
 		var dato = $('#bs-prod').val();
-		var url = 'ABMUsuario/php/busca_producto.php';
+		var url = 'Cajero/ABMUsuario/php/busca_producto.php';
 		$.ajax({
 		type:'POST',
 		url:url,
@@ -28,7 +28,7 @@ $(function(){
 });
 
 function agregaRegistro(){
-	var url = 'ABMUsuario/php/agrega_producto.php';
+	var url = 'Cajero/ABMUsuario/php/agrega_producto.php';
 	$.ajax({
 		type:'POST',
 		url:url,
@@ -50,7 +50,7 @@ function agregaRegistro(){
 }
 
 function eliminarProducto(id){
-	var url = 'ABMUsuario/php/elimina_producto.php';
+	var url = 'Cajero/ABMUsuario/php/elimina_producto.php';
 	var pregunta = confirm('¿Esta seguro de eliminar este Producto?');
 	if(pregunta==true){
 		$.ajax({
@@ -70,7 +70,7 @@ function eliminarProducto(id){
 
 function editarProducto(id){
 	$('#formulario')[0].reset();
-	var url = 'ABMUsuario/php/edita_producto.php';
+	var url = 'Cajero/ABMUsuario/php/edita_producto.php';
 		$.ajax({
 		type:'POST',
 		url:url,

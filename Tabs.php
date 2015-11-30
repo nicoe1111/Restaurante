@@ -6,24 +6,26 @@
                 $( "#tabs" ).tabs();
             });
             $(function() {
+                /////////Cajero///////////
                 $( "#gestionUsuario" ).click(function(evt) {
-                    $( "#contenedor" ).load("ABMUsuario/vistas/index.php")
+                    $( "#contenedor" ).load("Cajero/ABMUsuario/vistas/index.php")
                 });
+                $( "#getionComida" ).click(function(evt) {
+                    $( "#contenedor" ).load("Cajero/ABMComidas/vistas/index.php")
+                });
+                $( "#historialVentas" ).click(function(evt) {
+                    $( "#contenedor" ).load("Cajero/HistorialVentas/vistas/index.php")
+                });
+                /////////////////////////////
                 $( "#verMesas" ).click(function(evt) {
-                    $( "#contenedor" ).load("ABMMesa/vistas/index.php")
+                    $( "#contenedor" ).load("Cocina/vistas/index.php")
                 });
                 $( "#PlatosDetalles" ).click(function(evt) {
                     $( "#contenedor" ).load("PlatosDetalles.php")
                 });
-                $( "#getionComida" ).click(function(evt) {
-                    $( "#contenedor" ).load("ABMComidas/vistas/index.php")
-                });
                 $( "#pedidosMesa" ).click(function(evt) {
                     $( "#contenedor" ).load("ABMPedidoMesa/vistas/index.php")
                 });  
-                $( "#historialVentas" ).click(function(evt) {
-                    $( "#contenedor" ).load("HistorialVentas/vistas/index.php")
-                });
                 $( "#ordenes" ).click(function(evt) {
                     $( "#contenedor" ).load("Ordenes/CrearOrden.php")
                 }); 
