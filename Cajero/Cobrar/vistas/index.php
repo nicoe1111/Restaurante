@@ -17,12 +17,12 @@
         });
     };
     
-    function doFunction($id){
+    function doFunction($id_mesa, $id_user){
                 var url = 'Cajero/Cobrar/php/setear_confirmar.php';
 		$.ajax({
                     type:'POST',
                     url:url,
-                    data:'id='+$id,
+                    data: {id_mesa: $id_mesa, id_user: $id_user},
                     success: function(datos){
                             $('#contenido').html(datos);
                             actualizarAcordeon();
@@ -38,7 +38,7 @@
     <div id="contenido" >
         <?php
             $acceso = new AccesoMySql();
-            $mesas = $acceso->getMesasConPlatos();
+            $mesas = $acceso->getMesasCobrar();
             if(sizeof($mesas)>0){
         ?>
         <div id="accordion1">
@@ -46,7 +46,7 @@
             <?php
             foreach ($mesas as $mesa){
                 $acceso = new AccesoMySql();
-                $usuarios = $acceso->getPlatosMesaCocinero($mesa['id_mesa']);
+                $usuarios = $acceso->getMososMesaCobrar($mesa['id_mesa']);
 //                if(sizeof($usuarios)>0){
             ?>
                 
@@ -54,31 +54,28 @@
                 <div style="height: auto !important">
                 <table class="table table-striped table-condensed table-hover">
                 <tr>
-                    <th width="300">id_mesa_plato</th>
-                    <th width="300">id_plato</th>
-                    <th width="200">nombre</th>
-                    <th width="150">precio</th>
-                    <th width="150">Confirma Cocina</th>
+                    <th width="300">Cedula</th>
+                    <th width="300">Nombre</th>
+                    <th width="200">Apellido</th>
+                    <th width="150">Total</th>
+                    <th width="150">Opcion</th>
                 </tr>
                 <?php 
-                $total=0;
-                foreach ($usuarios as $usuario){
-                    $total = $total+$usuario['precio'];
-                ?>
+                foreach ($usuarios as $usuario){?>
                     <tr>
-                        <td><?php echo $usuario['id_mesa_plato']; ?></td>
-                        <td><?php echo $usuario['id_plato']; ?></td>
+                        <td><?php echo $usuario['cedula']; ?></td>
                         <td><?php echo $usuario['nombre']; ?></td>
-                        <td><?php echo $usuario['precio']; ?></td>
-                        <td> <button id="confirmarComida" onclick="doFunction(<?php echo $usuario['id_mesa_plato']; ?>);" type="button" class="btn btn-success" > Comida Pronta</button> </td>
+                        <td><?php echo $usuario['apellido']; ?></td>
+                        <td><?php echo $usuario['total']; ?></td>
+                        <td> <button id="confirmarComida" onclick="doFunction(<?php echo $mesa['id_mesa'].', '.$usuario['cedula']; ?>)" type="button" class="btn btn-success" > Cobrar </button> </td>
                     </tr>
                 <?php } ?>
-                </table><?php echo 'Precio Total ='.$total;?></div>
+                </table></div>
             <?php // }
                 }
             }else{
               echo '<div class="alert alert-info">
-                        <strong>No hay mas pedidos para confirmar!</strong>
+                        <strong>No hay mas mesas para cobrar!</strong>
                     </div>';
             } ?>
        
@@ -87,7 +84,7 @@
     </div>
     <?php }else{ ?>
         <div class="alert alert-danger">
-            <strong>Tiene que ser Cocinero para ver esta pagina!</strong>
+            <strong>Tiene que ser Cajero para ver esta pagina!</strong>
         </div>
     <?php } ?>
 </body>

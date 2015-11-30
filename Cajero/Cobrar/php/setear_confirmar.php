@@ -1,46 +1,52 @@
 <?php
 require_once("../../../Class/ClassMySql.php");
 $acceso = new AccesoMySql();
-$id = $_POST['id'];
+$id_mesa = $_POST['id_mesa'];
+$id_user = $_POST['id_user'];
 
-$acceso->setPlatosMesaConfirmar($id);
+$acceso->setMesaPlatoConfirmarCobro($id_mesa, $id_user);
 
 //CREAMOS NUESTRA VISTA Y LA DEVOLVEMOS AL AJAX
-
-        $acceso = new AccesoMySql();
-        $mesas = $acceso->getMesasConPlatos();
-        if(sizeof($mesas)>0){
-        echo '<div id="accordion1">';
-          foreach ($mesas as $mesa){
+  $acceso = new AccesoMySql();
+            $mesas = $acceso->getMesasCobrar();
+            if(sizeof($mesas)>0){
+        ?>
+        <div id="accordion1">
+        
+            <?php
+            foreach ($mesas as $mesa){
                 $acceso = new AccesoMySql();
-                $usuarios = $acceso->getPlatosMesaCocinero($mesa['id_mesa']);
-               // if(sizeof($usuarios)>0){
-          echo  '<h3> '.$mesa['nombre'].' </h3>
+                $usuarios = $acceso->getMososMesaCobrar($mesa['id_mesa']);
+//                if(sizeof($usuarios)>0){
+            ?>
+                
+                <h3><?php echo $mesa['nombre']; ?></h3>
                 <div style="height: auto !important">
                 <table class="table table-striped table-condensed table-hover">
                 <tr>
-                    <th width="300">id_mesa_plato</th>
-                    <th width="300">id_plato</th>
-                    <th width="200">nombre</th>
-                    <th width="150">precio</th>
-                    <th width="150">Confirma Cocina</th>
-                </tr>';
-                $total=0;
-                foreach ($usuarios as $usuario){
-                    $total=$total+$usuario['precio'];
-                echo  '<tr>
-                        <td>'.$usuario['id_mesa_plato'].'</td>
-                        <td>'.$usuario['id_plato'].'</td>
-                        <td>'.$usuario['nombre'].'</td>
-                        <td>'.$usuario['precio'].'</td>
-                        <td> <button id="confirmarComida" onclick="doFunction('.$usuario['id_mesa_plato'].');" type="button" class="btn btn-success" > Comida Pronta</button> </td>
-                    </tr>';
-                 } 
-                echo '</table>Precio Total ='.$total.'</div>';
-                //}
-           
-           }
-        echo '</div>';
-        }else{
-            echo '<div class="alert alert-info"><strong>No hay mas encargos para el cocinero!</strong></div>';
-         }
+                    <th width="300">Cedula</th>
+                    <th width="300">Nombre</th>
+                    <th width="200">Apellido</th>
+                    <th width="150">Total</th>
+                    <th width="150">Opcion</th>
+                </tr>
+                <?php 
+                foreach ($usuarios as $usuario){?>
+                    <tr>
+                        <td><?php echo $usuario['cedula']; ?></td>
+                        <td><?php echo $usuario['nombre']; ?></td>
+                        <td><?php echo $usuario['apellido']; ?></td>
+                        <td><?php echo $usuario['total']; ?></td>
+                        <td> <button id="confirmarComida" onclick="doFunction(<?php echo $mesa['id_mesa'].', '.$usuario['cedula']; ?>)" type="button" class="btn btn-success" > Cobrar </button> </td>
+                    </tr>
+                <?php } ?>
+                </table></div>
+            <?php // }
+                }
+            }else{
+              echo '<div class="alert alert-info">
+                        <strong>No hay mas mesas para cobrar!</strong>
+                    </div>';
+            } ?>
+       
+        </div>
