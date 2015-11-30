@@ -8,7 +8,7 @@ body {
 	padding-right: 0px;
 	padding-bottom: 10px;
 	padding-left: 0px;
-}
+}/*
 	
 td {
 	font:12px Arial, Helvetica, sans-serif;
@@ -35,13 +35,45 @@ h4 {
 	color:#000000;	
 	}
 	
-a {
-	color: #993300;	
-	letter-spacing:.2em;
+*/a {
+	letter-spacing:.1em;
         font-weight: bold;
+        text-decoration: none;
+        
 	}
+        
+  a:active {
+text-decoration: none;
 
-/*#navigation a {
+
+}
+
+
+a:link {
+text-decoration: none;
+
+
+}
+
+
+a:visited {
+text-decoration: none;
+
+
+}
+
+
+a:hover {
+text-decoration: none;
+}  
+        
+        
+        
+        
+        
+        /*
+
+#navigation a {
 	color: #FFF0C9;
 	line-height:17px;
 	letter-spacing:.1em;
@@ -51,7 +83,7 @@ a {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-weight: bold;
-	}*/
+	}
 	
 div {
   margin: .4em 0;
@@ -68,4 +100,4 @@ modificarPlato{
     font:18px Arial, Helvetica, sans-serif;
     color:#000000;	  
     text-decoration: none;
-}
+}*/

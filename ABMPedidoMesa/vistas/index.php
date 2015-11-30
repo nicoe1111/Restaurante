@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Tienda</title>
 <script src="ABMComidas/js/myjava.js"></script>
 
   <style>
@@ -82,7 +81,9 @@
         </div>
     </div>
     <?php }else{ ?>
-        <h1> Tiene que ser Administrador para ver esta pagina</h1>
+        <div class="alert alert-danger">
+            <strong>Tiene que ser Mozo para ver esta pagina!</strong>
+        </div>
     <?php } ?>
 </body>
 </html>
