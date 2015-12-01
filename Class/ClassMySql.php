@@ -450,6 +450,26 @@ function getAllMesas(){
         return $sql; 
     }
     /////////////////
+    
+    /////////////////GRAFICA/////////////
+    
+     function getValGrafica(){
+            $Mesa = array();
+            $sql = mysql_query("SELECT u.cedula, u.nombre, u.apellido , SUM(precio*Cantidad) as total FROM mesa_plato mp JOIN plato p ON mp.id_plato = p.id_plato JOIN usuario u ON u.cedula = mp.Mozo WHERE mp.conf_cocina is true AND mp.conf_mozo is true AND mp.conf_caja is true GROUP BY mp.Mozo ORDER BY mp.Mozo ASC", $this->con);
+            if ($sql){
+                while ($lista = mysql_fetch_array($sql)){
+                      $Mesa[] = $lista;
+                }           	                  
+            }else{
+                echo "ERROR: en la consulta con la base de datos";	
+            }
+            mysql_close($this->con);
+            mysql_free_result($sql);
+            return $Mesa;  		
+    }
+    
+    ////////////////////////////////////
+    
 }
 
 ?>
