@@ -13,7 +13,7 @@ $datos = array(
 				0 => $valores2['nombre'], 
 				1 => $valores2['apellido'], 
 				2 => $valores2['tipoUser'], 
-				3 => $valores2['pass'],
+				3 => md5($valores2['pass']),
 				);
 echo json_encode($datos);
 ?>

@@ -5,7 +5,8 @@
         <script>
             $(function() {
                 $("#accordion").accordion({
-                    active: true
+                    active: true,
+                    heightStyle: "content"
                 });
             });
         </script>

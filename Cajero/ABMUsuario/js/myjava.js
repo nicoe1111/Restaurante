@@ -87,7 +87,7 @@ function editarProducto(id){
 				$('#nombre').val(datos[0]);
 				$('#apellido').val(datos[1]);
 				$('#tipo').val(datos[2]);
-				$('#pass').val(datos[3]);
+				$('#pass').val();
 				$('#registra-producto').modal({
 					show:true,
 					backdrop:'static'
